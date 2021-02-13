@@ -5,3 +5,7 @@
  - Audrena
  - Sam
  - louis
+
+ # Model
+
+ ![model](CrawlerModel.png)
