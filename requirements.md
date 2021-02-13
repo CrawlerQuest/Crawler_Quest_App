@@ -1,7 +1,7 @@
 # Model
-![model](CrawlerModel.png)
+![model](./CrawlerModel.png)
 # Board
-![board](aww-board.png)
+![board](./aww-board.png)
 
 [Trello](https://trello.com/invite/b/PJNlJHbo/f312528635743f3d5e708f1962900094/project-crawler-quest)
 

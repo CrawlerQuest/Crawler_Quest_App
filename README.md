@@ -8,4 +8,4 @@
 
  # Model
 
- ![model](CrawlerModel.png)
+ ![model](./CrawlerModel.png)
