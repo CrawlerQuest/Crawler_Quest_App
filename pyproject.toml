@@ -2,13 +2,12 @@
 name = "crawler_quest_app"
 version = "0.1.0"
 description = ""
-authors = ["sam <samuelclark907@gmail.com>"]
+authors = ["bjgman12 <bjgman38@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 art = "^5.1"
 colorama = "^0.4.4"
-
 
 [tool.poetry.dev-dependencies]
 
