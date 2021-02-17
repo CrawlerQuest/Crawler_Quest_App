@@ -1,7 +1,6 @@
 {start} [You are feeling lucky today. Three adventures await before you. A (town) just around the mountain, a (dungeon) door peeks from the mountain's base, and a (path) through the forest. Which do you choose?]
 
-{dungeon} [You find yourself at the doorway to a Dungeon. You've heard many stories of great riches, and even greater foes inside. 
-Do you go in(go) or look around (look)?]
+{dungeon} [You find yourself at the doorway to a Dungeon. You've heard many stories of great riches, and even greater foes inside. Do you go in(go) or look around (look)?]
 
 {town} [You come Up to a quaint little village. You see a worn looking tavern near the entrance, a few homes scattered with animals, and a general store in the middle. There are many people bustlying about, but from the corner of your eye you see a small boy crying in the alley. Do you check on the boy(comfort), go to the tavern(tavern), or look in the general store (store)?]
 

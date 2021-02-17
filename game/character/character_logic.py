@@ -1,9 +1,10 @@
 class Character:
-    def __init__(self):
+    def __init__(self,name):
         self.strength = 5
         self.vitality = 5
         self.defense = 1
         self.gear = []
+        self.name = name
         self.id = "c"
 
 

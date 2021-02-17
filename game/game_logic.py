@@ -2,6 +2,7 @@ from art import *
 import re
 from colorama import Fore, Back, Style
 from kary import KaryTree, KaryNode
+from character.character_logic import Character
 
 
 def game_logic():
@@ -23,26 +24,68 @@ def game_logic():
     """)
     print(Style.RESET_ALL) 
     if start_game == "s":
-        play()
+        adventurer = Character(load())  #Creates instance of our character
+        play(adventurer) 
     else:
         quits()
 
-def play():
+def load():
+    """reads save file if theri is not one it creates then reads
+    Returns:
+        [string]:
+    """
+    loaded_data = False
+    save_data = False
+    username = input('Please enter your name adventurer')
+    try:
+        loaded_data = open(f'{username}.txt','r')
+    except:
+        save_data = open(f'{username}.txt','x')
+        save_data.write(f'{username}')
+
+    if loaded_data:
+        return loaded_data.read()
+    elif save_data:
+        return save_data.read()
+
+def play(adv):
     file = read_file('./assets/story.txt')
     story = process_story(file)
-    print(story['{start}'])
-    choice =input(f"""
-    What will you do?
-    (q)Dungeon
-    (w)Town
-    (e)Path
-    """)
-    if choice == 'q':
-        print(story['{dungeon}'])
-    elif choice == 'w':
-        print(story['{town}'])
-    elif choice == 'e':
-        print(story['{path}'])
+    input_keys = 'qwer'
+    input_string = f'''
+    What will you do?'''
+    print(story['start'][0])
+    current_ops = get_options(story['start'])
+
+    while adv.vitality:
+        for option in range(len(current_ops)):
+            input_string += f''' 
+            ({input_keys[option]}){current_ops[option]}'''
+        choice = input(input_string)
+        if choice == 'q':
+            print(story[f'{current_ops[0]}'][0])
+            current_ops = get_options(story[f'{current_ops[0]}'])
+            input_string = f'''
+                            What will you do?
+                            '''
+        elif choice == 'w':
+            print(story[f'{current_ops[1]}'][0])
+            current_ops = get_options(story[f'{current_ops[1]}'])
+            input_string = f'''
+                             What will you do?
+                            '''
+        elif choice == 'e':
+            print(story[f'{current_ops[1]}'][0])
+            current_ops = get_options(story[f'{current_ops[1]}'])
+            input_string = f'''
+                            What will you do?
+                            '''
+        elif choice == 'r':
+            print(story[f'{current_ops[1]}'][0])
+            current_ops = get_options(story[f'{current_ops[1]}'])
+            input_string = f'''
+                            What will you do?
+                            '''
 
 
 
@@ -52,13 +95,13 @@ def read_file(txt_file):
         return story_base
 
 def store_story(story_txt):
-    parsed = tuple(re.findall("\[[^\]]*\]", story_txt , re.IGNORECASE))
+    parsed = tuple(re.findall(r'\[(.*?)\]', story_txt , re.IGNORECASE))
     return parsed
     
 def process_story(txt_file):
     story_keys = {}
     count = 0
-    key_Nodes = tuple(re.findall("\{.*?\}", txt_file, re.IGNORECASE))
+    key_Nodes = tuple(re.findall(r"\{([A-Za-z0-9_'\s1-]+)\}", txt_file, re.IGNORECASE))
     for key in key_Nodes:
         # print(key)
         story_keys[f'{key}'] = []
@@ -68,14 +111,29 @@ def process_story(txt_file):
     for key in story_keys.keys():
         story_keys[f'{key}'].append(para[count])
         count += 1
-    
-    print(story_keys.keys())
     return story_keys
 
+def get_options(line):
+    """Takes in line of story text
+    parses out options
+    Args:
+        line ([string]): [story line]
+        Brandon Gonzo
+    """
+    options = tuple(re.findall(r"\(([A-Za-z0-9_'\s1-]+)\)", line[0], re.IGNORECASE))
+    return options
 
     
 
 def fight(Character, Monster):
+    """
+    Args:
+        Character (character object): [description]
+        Monster (monster object): [description]
+    Calls:
+        gameover: if character vitality reaches zero
+        winfight: if monster vitality reaches zero
+    """
     turn = 0
     rounds = 0
     while Character.vitality and Monster.vitality:
@@ -86,6 +144,10 @@ def fight(Character, Monster):
             take_turn(Monster)
             turn -= 1
             rounds += 1
+    if not Character.vitality:
+        gameover(monster.name)
+    elif not Monster.vitality:
+        winfight(monster.name)
 
 def take_turn(actor):
     if actor.id == "c":
@@ -104,7 +166,8 @@ def take_turn(actor):
     elif actor.id == "m":
         actor.behavior()
         
-
+def winfight(foeName):
+    pass
 
 
 def gameover(cause):
