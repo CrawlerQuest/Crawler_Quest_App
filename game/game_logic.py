@@ -1,10 +1,13 @@
 from art import *
+from colorama import Fore, Back, Style
 
 
 
 def game_logic():
     title = text2art("Crawler Quest", chr_ignore=True)
-    print(title)
+    print(Fore.RED + title)
+    print(Style.RESET_ALL) 
+    print(Fore.BLUE)
     print("""
     *****************
     Welcome
@@ -17,7 +20,8 @@ def game_logic():
     (S)tart Game
     (Q)uit Game
     """)
-    if start_game == "S"
+    print(Style.RESET_ALL) 
+    if start_game == "S":
         play()
     else:
         quits()
@@ -28,7 +32,7 @@ def play():
 def fight(Character, Monster):
     turn = 0
     rounds = 0
-    while Character.vitality and Monster.vitality
+    while Character.vitality and Monster.vitality:
         if not turn:
             take_turn(Character)
             turn += 1
@@ -38,7 +42,7 @@ def fight(Character, Monster):
             rounds += 1
 
 def take_turn(actor):
-    if actor.id == "c"
+    if actor.id == "c":
         take_t = input("""
         (A)ttack
         (D)efend

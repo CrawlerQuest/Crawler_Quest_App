@@ -22,6 +22,7 @@ class Monster:
         else:
             chance = random.choice((self.haymaker(), self.defend()))
             return chance
+            # does not - char health yet
 
 
 if __name__ == "__main__":
