@@ -8,7 +8,7 @@
 
  [Sam](https://github.com/samuelclark907)
 
- [louis](https://github.com/louiscaruso)
+ [Louis](https://github.com/louiscaruso)
 
  [Bhagirath](https://github.com/Bhattb2)
 
