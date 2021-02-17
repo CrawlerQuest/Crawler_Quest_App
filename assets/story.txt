@@ -1,0 +1,33 @@
+{start} [You are feeling lucky today. Three adventures await before you. A (town) just around the mountain, a (dungeon) door peeks from the mountain's base, and a (path) through the forest. Which do you choose?]
+
+{dungeon} [You find yourself at the doorway to a Dungeon. You've heard many stories of great riches, and even greater foes inside. 
+Do you go in(go) or look around (look)?]
+
+{town} [You come Up to a quaint little village. You see a worn looking tavern near the entrance, a few homes scattered with animals, and a general store in the middle. There are many people bustlying about, but from the corner of your eye you see a small boy crying in the alley. Do you check on the boy(comfort), go to the tavern(tavern), or look in the general store (store)?]
+
+{path} [You come upon a forked path through the forest. One path  goes down by a small river. You see it looks bright and quite cheery. There are red toadstools along the edges of the path. The other path looked less pleasing. It is darker, with dead trees lining the way. However you see twinkling from the corner of your vision and this path feels warm. Do you go down the (river) path, or take the (dark) path?]
+
+{go} [You are staring down a dark solid stone hallway. There is faint light at the end, coming from under a door. A cold breeze runs down your spine and the dungeon door slams shut. You can't open it again. Do you (check) out the door, or (examine) first?]
+
+{look} [You can see the dungeon door has been opened many times as the brass is worn away, but when you open the door slightly, the other knob looks dustly and unused. To the side of the door there is a loose rock that seems to be blocking a hole. Moving that aside, There seems to be an entrance here. Do you (go) in the new entrance or (take) your chances with the well known door?] 
+
+{comfort} [You go to check on the crying little boy. He says his papa wasn't home when he got off school, and there was a trail of something sticky and red across his home. He asks you to help him find his papa, offering you a family heirloom. It's just a simple Knitting set, but it has a glow about it. Do you (help) the boy, or go to the (tavern), or (look) in the general store?]
+
+{tavern} [You go to the Tavern. The thick smell of dust permeates your colthes as you find a seat at the bar. The men stop and look you up and down for a second. The barkeep motions for you to sit down. "We don't get many outsiders around here. What are you looking for? You say: I'm looking for (Adventure) or something to keep me (healthy), or I'm for (hire).]
+
+{store} [The general Store looks average. There are shelves with the nessessities like flour and eggs, and some more eclectic things in the back. A humble looking man with grey whispy eyebrows greets you warmly. "Hello there adventurer! Is there anything you're looking for?" You say "I'm looking for a (sword)" or "I'm looking for a (bow)"  or "I'm looking for (something) else"]
+
+{river} [You take the river path, and the water gently sprays across your face as you walk by. You didn't pay any mind to the toadstools before, but there seems to be more and more of them as you walk. Suddenly they are even across the path behind you! You see a bridge ahead crossing the water, and don't see any toadstools on the other side. Do you (run) across the bridge or turn and (face) the toadstools?]
+
+{dark} [You start down the dark path. It's really cold, and you bring your coat in closer. There is a howl in the distance as you think back to the safer looking path. Suddenly a small white rabbit runs across your path. "Hello human, are you lost?" It spoke to you! Do you (run) away or try and (speak) to the rabbit?]
+
+{check} [You decide to just go for the door. You failed to see the colored pattern on the floor and more promptly dropped through a trapdoor into a pit make of steel spikes. You die on impact, and even your ghost lost HP.]
+
+{examine} [You see a weird pattern on the floor. It looks like the blue squares are raised, but only slightly. You also see a bit of what looks like dried blood seeping from the floor into the tiles. Do you carefully cross the room on the (blue) or (avoid) the blue tiles?]
+
+{sqeeze} [You sqeeze down in into the small entrance next to the dungeon. It seems to slant downward. At the bottom, the squeeze opens up into big room. One side has 6 foot steel spikes pounded into the groud above what looks to be a trap door. You can see remenants of others who failed to make it past this trick. On the other is a table with various books and bottles, next to a door. Do you (check) the bottles to see if they are useful or (sneak) through the door?]
+
+{help} [You follow the little boy to his home. There you find a fresh trail of blood leading to the barn. Inside, it looks like there was a struggle. There is grey fur clinging to the wooden stairs, and the gun from the wall mount is missing. You hear a loud growl come from the barn, and quickly hide the kid. You can (investigate) the barn, or go back to the (town). Either way, your sword is out.]
+
+{adventure} [You ask for an adventure, and the Barkeep comes in really close. You can small his sour breath as he says, "You know, there have been rumours of a werewolf hanging out around town and eating barn animals. I'm sure the mayor would offer you a heaftly reward if you were able to kill it and bring it back for research." Do you (accept) the adventure, ask for something (healthy) or ask for a real (job).]
+
