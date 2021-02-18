@@ -1,8 +1,10 @@
 from art import *
+import random
 import re
 from colorama import Fore, Back, Style
 from kary import KaryTree, KaryNode
 from character.character_logic import Character
+from monster.monster_logic import Bestiary, Monster
 
 
 def game_logic():
@@ -25,7 +27,9 @@ def game_logic():
     print(Style.RESET_ALL) 
     if start_game == "s":
         adventurer = Character(load())  #Creates instance of our character
-        play(adventurer) 
+        besti = Bestiary()
+        mon = Monster('john',2,1,0,2)
+        play(adventurer,besti) 
     else:
         quits()
 
@@ -49,7 +53,7 @@ def load():
     elif save_data:
         return return_data.read()
 
-def play(adv):
+def play(adv,bestiary):
     file = read_file('./assets/story.txt')
     story = process_story(file)
     input_keys = 'qwer'
@@ -58,11 +62,12 @@ def play(adv):
     print(story['start'][0])
     current_ops = get_options(story['start'])
 
-    while adv.vitality:
+    while adv.vit:
         for option in range(len(current_ops)):
             input_string += f''' 
             ({input_keys[option]}){current_ops[option]}'''
         choice = input(input_string)
+        #add instructions for fight
         if choice == 'q':
             print(story[f'{current_ops[0]}'][0])
             current_ops = get_options(story[f'{current_ops[0]}'])
@@ -90,6 +95,9 @@ def play(adv):
             input_string = f'''
                             What will you do?
                             '''
+        elif choice == 'fight':
+            mon = random.choice(bestiary.randos)
+            fight(adv,mon)
 
 
 
@@ -117,7 +125,7 @@ def process_story(txt_file):
         
         count += 1
         # print(count) 
-    print(story_keys)
+    #print(story_keys)
     return story_keys
 
 def get_options(line):
@@ -138,41 +146,44 @@ def fight(Character, Monster):
         Character (character object): [description]
         Monster (monster object): [description]
     Calls:
-        gameover: if character vitality reaches zero
-        winfight: if monster vitality reaches zero
+        gameover: if character vit reaches zero
+        winfight: if monster vit reaches zero
     """
     turn = 0
     rounds = 0
-    while Character.vitality and Monster.vitality:
+    while Character.vit and Monster.vit:
         if not turn:
-            take_turn(Character)
+            take_turn(Character,Monster)
             turn += 1
         else:
-            take_turn(Monster)
+            take_turn(Monster,Character)
             turn -= 1
             rounds += 1
-    if not Character.vitality:
+    if not Character.vit:
         gameover(Monster.name)
-    elif not Monster.vitality:
+    elif not Monster.vit:
         winfight(Monster.name)
 
-def take_turn(actor):
+def take_turn(actor,passive):
     if actor.id == "c":
         take_t = input("""
         (A)ttack
         (D)efend
         """)
+        print(f"""
+        adv health {actor.vit}
+        monster health {passive.vit}""")
 
         if take_t == "A":
-            damage = Character.strength - Monster.defense
+            damage = actor.strength - passive.defense
             if damage == 0:
                 damage = 1
-            Monster.vitality -= damage
+            passive.vit -= damage
         elif take_t == "D":
-            Character.defend()
+            actor.defend()
     elif actor.id == "m":
         damage = actor.behavior()
-        Character.vitality -= damage
+        passive.vit -= damage
 
 def winfight(foeName):
     pass
