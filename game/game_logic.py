@@ -42,11 +42,12 @@ def load():
     except:
         save_data = open(f'{username}.txt','x')
         save_data.write(f'{username}')
+        return_data = open(f'{username}.txt','r')
 
     if loaded_data:
         return loaded_data.read()
     elif save_data:
-        return save_data.read()
+        return return_data.read()
 
 def play(adv):
     file = read_file('./assets/story.txt')
@@ -65,24 +66,27 @@ def play(adv):
         if choice == 'q':
             print(story[f'{current_ops[0]}'][0])
             current_ops = get_options(story[f'{current_ops[0]}'])
+            print(current_ops)
             input_string = f'''
                             What will you do?
                             '''
         elif choice == 'w':
             print(story[f'{current_ops[1]}'][0])
             current_ops = get_options(story[f'{current_ops[1]}'])
+            print(current_ops)
             input_string = f'''
                              What will you do?
                             '''
         elif choice == 'e':
-            print(story[f'{current_ops[1]}'][0])
-            current_ops = get_options(story[f'{current_ops[1]}'])
+            print(story[f'{current_ops[2]}'][0])
+            current_ops = get_options(story[f'{current_ops[2]}'])
+            print(current_ops)
             input_string = f'''
                             What will you do?
                             '''
         elif choice == 'r':
-            print(story[f'{current_ops[1]}'][0])
-            current_ops = get_options(story[f'{current_ops[1]}'])
+            print(story[f'{current_ops[3]}'][0])
+            current_ops = get_options(story[f'{current_ops[3]}'])
             input_string = f'''
                             What will you do?
                             '''
@@ -107,10 +111,13 @@ def process_story(txt_file):
         story_keys[f'{key}'] = []
     
     para = store_story(txt_file)
-    # print(para)
+    
     for key in story_keys.keys():
         story_keys[f'{key}'].append(para[count])
+        
         count += 1
+        # print(count) 
+    print(story_keys)
     return story_keys
 
 def get_options(line):
@@ -145,9 +152,9 @@ def fight(Character, Monster):
             turn -= 1
             rounds += 1
     if not Character.vitality:
-        gameover(monster.name)
+        gameover(Monster.name)
     elif not Monster.vitality:
-        winfight(monster.name)
+        winfight(Monster.name)
 
 def take_turn(actor):
     if actor.id == "c":
@@ -164,8 +171,9 @@ def take_turn(actor):
         elif take_t == "D":
             Character.defend()
     elif actor.id == "m":
-        actor.behavior()
-        
+        damage = actor.behavior()
+        Character.vitality -= damage
+
 def winfight(foeName):
     pass
 
