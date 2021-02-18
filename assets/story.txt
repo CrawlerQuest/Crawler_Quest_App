@@ -1,7 +1,6 @@
 {start} [You are feeling lucky today. Three adventures await before you. A (town) just around the mountain, a (dungeon) door peeks from the mountain's base, and a (path) through the forest. Which do you choose?]
 
-{dungeon} [You find yourself at the doorway to a Dungeon. You've heard many stories of great riches, and even greater foes inside. 
-Do you go in(go) or look around (look)?]
+{dungeon} [You find yourself at the doorway to a Dungeon. You've heard many stories of great riches, and even greater foes inside. Do you go in(go) or look around (look)?]
 
 {town} [You come Up to a quaint little village. You see a worn looking tavern near the entrance, a few homes scattered with animals, and a general store in the middle. There are many people bustlying about, but from the corner of your eye you see a small boy crying in the alley. Do you check on the boy(comfort), go to the tavern(tavern), or look in the general store (store)?]
 
@@ -29,9 +28,9 @@ Do you go in(go) or look around (look)?]
 
 {help} [You follow the little boy to his home. There you find a fresh trail of blood leading to the barn. Inside, it looks like there was a struggle. There is grey fur clinging to the wooden stairs, and the gun from the wall mount is missing. You hear a loud growl come from the barn, and quickly hide the kid. You can (investigate) the barn, or go back to the (town). Either way, your sword is out.]
 
-{adventure} [You ask for an adventure, and the Barkeep comes in really close. You can small his sour breath as he says, "You know, there have been rumours of a werewolf hanging out around town and eating barn animals. I'm sure the mayor would offer you a heafty reward if you were able to kill it and bring it back for research." Do you (accept) the adventure, ask for something (healthy) or ask for a real (hire).]
+{adventure} [You ask for an adventure, and the Barkeep comes in really close. You can small his sour breath as he says, "You know, there have been rumours of a creature hanging out around town and eating barn animals. I'm sure the mayor would offer you a heafty reward if you were able to kill it and bring it back for research." Do you (accept) the adventure, ask for something (healthy) or ask for a real (hire).]
 
-{healthy} [The bar keep reaches behind the counter and pulls out package. He says "This is an acient Lambas bread. It stays fresh for months when wrapped in these mallorn leaves, They will keep sweet for many many days, if they are unbroken and left in their leaf wrappings. One will keep a traveller on his feet for a day" You take the Lambas bread and stow it within your pouch. Do you want to (investigate) the barn or  ask for a job (hire).}
+{healthy} [The bar keep reaches behind the counter and pulls out package. He says "This is an acient Lambas bread. It stays fresh for months when wrapped in these mallorn leaves, They will keep sweet for many many days, if they are unbroken and left in their leaf wrappings. One will keep a traveller on his feet for a day" You take the Lambas bread and stow it within your pouch. Do you want to (investigate) the barn or  ask for a job (hire).]
 
 {sword} [The merchant says, "Oh! Going to slay something? I have the perfect one for you. I came across this beauty in the far reaches of our land. I found it deep in a giant tree. Once I cut it out, I could tell it was something special. I think you'd be the perfect adventurer to use this wisely."  Do you want to (investigate) the barn or  ask for a job (hire) or go back to the (town).]
 
@@ -39,7 +38,7 @@ Do you go in(go) or look around (look)?]
 
 {something} [You say, "I think I'm good." Do you want to (investigate) the barn or  ask for a job (hire) or go back to the (town).] 
 
-{across} [You sprint across the bridge. The toadstools stopped following you, but you can hear their angry cries as they go back to the path. One tried to venture closer to the bridge but suddenly disappeared. All you saw was the flash of red being dragged under the bridge. Suddenly, an explosion blocks your path across the bridge. As the dust settles you see that a troll-like creature has appeared! It's sickly green skin is covered in dirt. It had tuffs of black, hair like needles across it's back and arms. You can hear it's deep, heavy breathing. It slurps the remainer of the toadstool into it's sticky, sour mouth. Do you (run) away and hoping the Toadstools forgot you or (fight) your way through the troll?]
+{across} [You sprint across the bridge. The toadstools stopped following you, but you can hear their angry cries as they go back to the path. One tried to venture closer to the bridge but suddenly disappeared. All you saw was the flash of red being dragged under the bridge. Suddenly, an explosion blocks your path across the bridge. As the dust settles you see that a  creature has appeared! It's sickly green skin is covered in dirt. It had tuffs of black, hair like needles across it's back and arms. You can hear it's deep, heavy breathing. It slurps the remainer of the toadstool into it's sticky, sour mouth. Do you (run) away and hoping the Toadstools forgot you or (fight) your way through the creature?]
 
 {face} [You see that toadstools arn't going near the bridge, and figure there is something they are scared of. You see a tree brach strong enough to jump upon. As you do, the Toadstools surround you, but you can see the only defense they have is a small set of teeth. Do you (swing) your sword down and hope they get the message, or (throw) down some of your rations hoping to divert their attentions?]
 
@@ -47,3 +46,56 @@ Do you go in(go) or look around (look)?]
 
 {speak} [You try and talk to the white rabbit, "I mean you no harm! I'm just an adventurer looking for work" the white rabbit turns around and stomps his little leg at you, looks into your eyes and into the woods. You think he wants you to follow him. Do you (follow) the white rabbit or go back to the (town)?]
 
+{blue} [You tried to cross on the blue tiles, but alas this was a trap! Your footing slips and you almost fall upon spikes. You can see the blood covered spikes as you grasp the other end of the trap door. With a big heave you were able to get yourself out of the trap, but not without scrapes. At the end of the hall is only a door, with a warm light coming from underneath. Do you (open) the door and go in or check for (more) information?]
+
+{avoid} [You crossed the hallway, avoiding any blue tiles. You made it across safely. At the end is only a door, with a warm light coming from underneath. Do you (open) the door and go in or check for (more) information?]
+
+{check} [The bottles are covered in dust, but you can see small descriptions. Some are unreadable, but you take decide to take the ones with animals on them. Maybe you'll sell them or find a use for them later. Through the door you see a spiral staircase, but nothing else. All you can do is go (up) the staircase or quit this adventure.]
+
+{sneak} [Through the door you see a spiral staircase, but nothing else. All you can do is go (up) the staircase or quit this adventure. You sneaked around for nothing, and you look silly doing it too.]
+
+{investigate} [You follow a blood stained trail to the barn doors. You can hear muffled sounds, and something heavily bumping around. You have the element of surprise now, so do you (fight) or (run) away]
+
+{accept} [You accept the adventure with gusto! Dad-puns in tow, you gather you things and head out to find this creature. It's not long before you find a trail of blootrail of blood heading into a barn.  You can hear muffled sounds, and something heavily bumping around. You have the element of surprise now, so do you (fight) or (run) away]
+
+{hire} [Oh you see some work, huh? Well, I have job I need done, and you look the type to sort it out. I get supplies in from the Capital, but recently my shipments have arrived quite torn up. I even lost a hired man. Now, some of my supplies are special, and I would rather not involve the authorities. Would you go and (protect) my next shipment and take care of whatever is stopping them? or you can go back to the (town)]
+
+{swing} [You swing your sword down and the Toadstools dodge it easily. They turn a brighter red and gather together. You see little bits of steam coming from what looks like ears. They suddenly disappear into the woods. You think it's safe to get down now, but as you do a creature steps out of the woods. Do you (fight) or (run) away?]
+
+{throw} [You throw down the rest of your food. They look at it... gently walking (hobbling?) up to the bits. They take it upon their heads. how?! You think. They don't have hands! They go into the forest and disappear. You can either (follow) them or (continue) down the path again.]
+
+{going} [You keep going, hoping to find something cool. In the forest you find something you don't reconize. It looks like a big bow tie made out of metal. There is a round center part, and two big hexagonal shaped panels jutting out from the side. It is covered in moss and looks like it crashed here. On the side you swipe away some dust and make out the words  DS-61-2. Do you go (inside) or keep going into the (woods)?]
+
+{follow} [You follow the white rabbit deep into the woods. It gets darker and darker, but tiny lights appear to float through the forest along your path. A fine mist joins you as well. The rabbit stops at an ancient tree. It's bigger than any you've ever seen. Is it you, or did the rabbit just motion for you to go in? Do you go in the (tree) or perhaps try and (walk) away?]
+
+{open} [You open the door, and step inside. There is a warm hearth in the corner, surrounded by meats and drying herbs. There is a huge chair facing the hearth, and something big is seated there. Suddenly the creature turns around and looks at you. It looks angry. Are you going to (fight) or (sprint) away?]
+
+{more} [There is nothing to see in the small hall you are in, but you bend down to try and see through the door lock. You can barely make out a fire, and something big blocking it. You notice fingers tapping on the side, illuminated by the fire. Do you (knock) and see if it's friendly or sneak in and (fight)?]
+
+{up} [You go up the stairs uneventfully, but there is no way out? Looking around you notice a small button hidden in the vines. You push it and the wall opens up. You see the main door across the hall, and are now standing next to a door with a warm light coming from underneath. Do you (open) the door and go in or check for (more) information?] 
+
+{protect} [You take the map he gave, and set out to meet with the current shipment. The path is an easy, and well travelled road. Eventually you come across the people with the shipment. As you camp with them for the night, no one thinks the danger is real. When the moon is high, you hear a sudden screech and banging as a creature attacks the crates trying to get the shipment. Do you (fight) or (run) away?]
+
+{follow} [You try and follow the Toadstools, but they are small and quick, and you are clumsy and loud. As you stumble through the woods after them, you come across a creature! It tries to bite your head! Do you (fight) or (run) away?]
+
+{continue} [You decide to let bygones be bygones and just start walking your path again. Unfortuntly you walk to close to the bridge and a creature jumps out at you! Do you (fight) or (run) away?]
+
+{inside} [You find a broken window, and with a little creativity are able to get it open. There is a loud crash as the window falls. Inside there is a single seat, and many buttons. It looks like some type of vehicle. Somehow you get it to turn on. Is this magic? The board in front of you lights up, and a small glowing blue man appears. In a broken message you hear him say to self destruct as the empire has fallen. You have no time to think about this magic, as out of the woods a creature appears, and it looks hungry! Do you (fight) or (run) away?]
+
+{woods} [You decide to leave the weird looking object and continue through the woods. As you're walking a calm serenity takes over. You hardly notice the creature sneaking up behind you. Do you break out of the trance and (fight) or will you (jump) away into the river nearby?]
+
+{tree} [You decide to go into the tree. It's a tight sqeeze, but you manage to far enough down to enter into a big meeting hall. There are pictures of rabbits, like the white one, but dressed in splendid kingly clothes. It looks like they used to have many tables and meeting areas, but instead you see a creature angrily tearing apart the room. Do you (fight) or run (away)?]
+
+{walk} [You try and walk away from the rabbit, not wanting to go down into an unknown dark hole. What kind of adventurer are you anyways? You see the rabbit joined by a few others, their tormented cries piercing your cold soul. You can be a good adventurer and sprint into the (tree) or you can go (deeper) into the woods.]
+
+{sprint} [You try and sprint away out of fear, but trip on the doorway. The creature comes up on you fast and you are forced to (fight) so grab your sword and type that in.]
+
+{knock} [You knock on the door. A creature comes and opens the door carefully. "What do you want?" He rattles off. You say I'm an adventurer just here to (explore). I wasn't aware anyone lived here! or you can say I'm here to get some treasure! (fight)]
+
+{jump} [You jump into the river, and are suddenly swept away. The creature doesn't follow, but out of the pan into the fire huh? You are able to drag yourself up onto the bank, and you see you're back to the town. Would you like to go to (town) or perhaps check out that (dungeon) from before?]
+
+{away} [You try to run away but you didn't use the same entrance. Your stomach turns as you suddenly find yourself on the other side of the woods. You can go back to the (town) as it is right here or go back and help the rabbits (fight) the creature. They did look sad. How could you leave them?]
+
+{deeper} [You go deeper into the woods, but are soon followed by something big! A creature comes charging towards you yelling "I'm not satisfied! Those snacks were not enough!" He licks his lips and is almost upon you! QUICK! Do you (fight) or (run) away?]
+
+{explore} ["Oh, just here to explore? Well, in order to explore here you'll need to show me you're worthy." The creature pushes a button and you are dropped into a cage. A door opens on the end and another, badder creature steps out looking hungry. You hear the creature above laughing and you're only choice is to (fight). Choose to go down with honor!]
