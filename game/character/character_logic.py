@@ -1,14 +1,38 @@
+
+
 class Character:
     def __init__(self,name):
         self.strength = 8
         self.vit = 9
         self.defense = 4
-        self.gear = []
+        self.gear = {
+        "sword": None,
+        "shield": None,
+        "helmet": None}
         self.name = name
         self.id = "c"
         self.level = 1
         self.exp_to_level = 5
+        self.potatoes = 25
 
+    def add_item(self, item):
+        self.gear[item.kind] = item
+
+    def pull_stats(self):
+        if self.gear["sword"]:
+            self.strength += self.gear["sword"].strength
+            self.vit += self.gear["sword"].vit
+            self.defense += self.gear["sword"].defense
+        if self.gear["helmet"]:
+            self.strength += self.gear["helmet"].strength
+            self.vit += self.gear["helmet"].vit
+            self.defense += self.gear["helmet"].defense
+        if self.gear["shield"]:
+            self.strength += self.gear["shield"].strength
+            self.vit += self.gear["shield"].vit
+            self.defense += self.gear["shield"].defense
+
+                
 
     def sword(self,name,strength,vit):
         self.strength += strength
@@ -32,6 +56,9 @@ class Character:
 
     def defend(self):
         self.defense = self.defense * 1.50
+
+    def take_pots(self, potatoe):
+        self.potatoes += potatoe
     
     def exp_gain(self,exp):
         """[takes in int of experience and subtracts from needed exp to level]
@@ -62,6 +89,10 @@ class Character:
         Strength:{self.strength}
         Vitality:{self.vit}
         Defence:{self.defense}""")
+
+
+
+
         
             
 

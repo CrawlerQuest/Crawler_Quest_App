@@ -5,6 +5,7 @@ from colorama import Fore, Back, Style
 from kary import KaryTree, KaryNode
 from character.character_logic import Character
 from monster.monster_logic import Bestiary, Monster
+from merchant.merchant_logic import Storefront, Items
 
 
 def game_logic():
@@ -26,9 +27,10 @@ def game_logic():
     """)
     print(Style.RESET_ALL) 
     if start_game == "s":
-        adventurer = Character(load())  #Creates instance of our character
+        adventurer = Character(load())
+        store = Storefront()  #Creates instance of our character
         besti = Bestiary()
-        play(adventurer,besti) 
+        play(adventurer, besti, store) 
     else:
         quits()
 
@@ -52,7 +54,7 @@ def load():
     elif save_data:
         return return_data.read()
 
-def play(adv,bestiary):
+def play(adv, bestiary, store):
     file = read_file('./assets/story.txt')
     story = process_story(file)
     input_keys = 'qwer'
@@ -63,6 +65,8 @@ What will you do?'''
     current_ops = get_options(story['start'])
 
     while adv.vit:
+        if len(current_ops) == 0:
+            gameover("Your not smart enough")
         for option in range(len(current_ops)):
             input_string += f''' 
 ({input_keys[option]}){current_ops[option]}
@@ -72,20 +76,27 @@ What will you do?'''
             if current_ops[0] == 'fight':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+            elif current_ops[0] == 'store':
+                store.show_shop()
+                shop(adv)
+                
             else:
                 print(story[f'{current_ops[0]}'][0])
                 current_ops = get_options(story[f'{current_ops[0]}'])
-                print(current_ops)
+                # print(current_ops)
                 input_string = f'''
 What will you do?'''
         elif choice == 'w':
             if current_ops[1] == 'fight':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+            elif current_ops[1] == 'store':
+                store.show_shop()
+                shop(adv)
             else:
                 print(story[f'{current_ops[1]}'][0])
                 current_ops = get_options(story[f'{current_ops[1]}'])
-                print(current_ops)
+                # print(current_ops)
                 input_string = f'''
 What will you do?'''
 
@@ -93,10 +104,13 @@ What will you do?'''
             if current_ops[2] == 'fight':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+            elif current_ops[2] == 'store':
+                store.show_shop()
+                shop(adv)                
             else:
                 print(story[f'{current_ops[2]}'][0])
                 current_ops = get_options(story[f'{current_ops[2]}'])
-                print(current_ops)
+                # print(current_ops)
                 input_string = f'''
 What will you do?'''
 
@@ -104,6 +118,9 @@ What will you do?'''
             if current_ops[3] == 'fight':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+            elif current_ops[3] == 'store':
+                store.show_shop()
+                shop(adv)                
             else:
                 print(story[f'{current_ops[3]}'][0])
                 current_ops = get_options(story[f'{current_ops[3]}'])
@@ -247,12 +264,34 @@ def winfight(mon,character,hp_reset):
     """
     # hp for monsters need to be reset
     mon.vit = hp_reset
+    character.take_pots(mon.potatoes)
+    print(f"you have {character.potatoes} NOW")
     print(f'You defeated {mon.name} and gained {mon.exp_val} experience')
     print(character.exp_gain(mon.exp_val))
 
+def shop(adv,store):
+    buy = input("What are you buying (armor , weapons)")
+    if buy == "armor":
+        item_select = input("Type name of item")
+        for item in store.armor:
+            if item_select == item.name:
+                if adv.potatoes >= item.price:
+                    adv.add_item(item)
+                else:
+                    print("No money no honey")
+    elif buy == "weapons":
+        item_select = input("Type name of item")
+        for item in store.armor:
+            if item_select == item.name:
+                if adv.potatoes >= item.price:
+                    adv.add_item(item)
+                else:
+                    print("No money no honey")
     
 
+    # if adv.potatoes >= store.weapons[0]
 
+    
 def gameover(cause):
     endgame = text2art(f"{cause}", chr_ignore=True)
     print(endgame)
@@ -263,16 +302,28 @@ def gameover(cause):
     if endgame_input == "Q":
         quits()
     else:
-        play()
+        game_logic()
 
 def quits():
-    pass
+    print("You are the weakest link goodbye")
+    exit()
 
 if __name__ == "__main__":
-    game_logic()
+    # game_logic()
     # story_txt = read_file('./assets/story.txt')
     # print(store_story(story_txt))
     # process_story(story_txt)
+    char = Character("sam")
+    bow = Items("bow", 10, 10, 10, "sword", 100)
+    char.add_item(bow)
+    print(char.strength)
+    print(char.vit)
+    print(char.defense)
+    char.pull_stats()
+    print(char.strength)
+    print(char.vit)
+    print(char.defense)
+
 
 
 
