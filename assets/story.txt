@@ -8,7 +8,7 @@
 
 {go} [You are staring down a dark solid stone hallway. There is faint light at the end, coming from under a door. A cold breeze runs down your spine and the dungeon door slams shut. You can't open it again. Do you (check) out the door, or (examine) first?]
 
-{look} [You can see the dungeon door has been opened many times as the brass is worn away, but when you open the door slightly, the other knob looks dustly and unused. To the side of the door there is a loose rock that seems to be blocking a hole. Moving that aside, There seems to be an entrance here. Do you (go) in the new entrance or (take) your chances with the well known door?] 
+{look} [You can see the dungeon door has been opened many times as the brass is worn away, but when you open the door slightly, the other knob looks dustly and unused. To the side of the door there is a loose rock that seems to be blocking a hole. Moving that aside, There seems to be an entrance here. Do you (go) in the new entrance or (go) take your chances with the well known door?] 
 
 {comfort} [You go to check on the crying little boy. He says his papa wasn't home when he got off school, and there was a trail of something sticky and red across his home. He asks you to help him find his papa, offering you a family heirloom. It's just a simple Knitting set, but it has a glow about it. Do you (help) the boy, or go to the (tavern), or (look) in the general store?]
 
