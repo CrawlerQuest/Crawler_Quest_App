@@ -28,7 +28,6 @@ def game_logic():
     if start_game == "s":
         adventurer = Character(load())  #Creates instance of our character
         besti = Bestiary()
-        mon = Monster('john',2,1,0,2)
         play(adventurer,besti) 
     else:
         quits()
@@ -58,46 +57,66 @@ def play(adv,bestiary):
     story = process_story(file)
     input_keys = 'qwer'
     input_string = f'''
-    What will you do?'''
-    print(story['start'][0])
+What will you do?'''
+    print(f'''{story['start'][0]}
+    ''')
     current_ops = get_options(story['start'])
 
     while adv.vit:
         for option in range(len(current_ops)):
             input_string += f''' 
-            ({input_keys[option]}){current_ops[option]}'''
+({input_keys[option]}){current_ops[option]}
+'''
         choice = input(input_string)
-        #add instructions for fight
         if choice == 'q':
-            print(story[f'{current_ops[0]}'][0])
-            current_ops = get_options(story[f'{current_ops[0]}'])
-            print(current_ops)
-            input_string = f'''
-                            What will you do?
-                            '''
+            if current_ops[0] == 'fight':
+                mon = random.choice(bestiary.randos)
+                fight(adv,mon)
+            else:
+                print(story[f'{current_ops[0]}'][0])
+                current_ops = get_options(story[f'{current_ops[0]}'])
+                print(current_ops)
+                input_string = f'''
+What will you do?'''
         elif choice == 'w':
-            print(story[f'{current_ops[1]}'][0])
-            current_ops = get_options(story[f'{current_ops[1]}'])
-            print(current_ops)
-            input_string = f'''
-                             What will you do?
-                            '''
+            if current_ops[1] == 'fight':
+                mon = random.choice(bestiary.randos)
+                fight(adv,mon)
+            else:
+                print(story[f'{current_ops[1]}'][0])
+                current_ops = get_options(story[f'{current_ops[1]}'])
+                print(current_ops)
+                input_string = f'''
+What will you do?'''
+
         elif choice == 'e':
-            print(story[f'{current_ops[2]}'][0])
-            current_ops = get_options(story[f'{current_ops[2]}'])
-            print(current_ops)
-            input_string = f'''
-                            What will you do?
-                            '''
+            if current_ops[2] == 'fight':
+                mon = random.choice(bestiary.randos)
+                fight(adv,mon)
+            else:
+                print(story[f'{current_ops[2]}'][0])
+                current_ops = get_options(story[f'{current_ops[2]}'])
+                print(current_ops)
+                input_string = f'''
+What will you do?'''
+
         elif choice == 'r':
-            print(story[f'{current_ops[3]}'][0])
-            current_ops = get_options(story[f'{current_ops[3]}'])
+            if current_ops[3] == 'fight':
+                mon = random.choice(bestiary.randos)
+                fight(adv,mon)
+            else:
+                print(story[f'{current_ops[3]}'][0])
+                current_ops = get_options(story[f'{current_ops[3]}'])
+                input_string = f'''
+What will you do?'''
+
+        elif choice == 'lft':
+                mon = random.choice(bestiary.randos)
+                fight(adv,mon)
+        else:
             input_string = f'''
-                            What will you do?
+What will you do?
                             '''
-        elif choice == 'fight':
-            mon = random.choice(bestiary.randos)
-            fight(adv,mon)
 
 
 
@@ -151,42 +170,87 @@ def fight(Character, Monster):
     """
     turn = 0
     rounds = 0
+    mon_reset = Monster.vit
+    print(f'A {Monster.name} approaches')
+    print(f"""
+adv health {Character.vit}   **************     monster health {Monster.vit}
+strength {Character.strength}                   strenght {Monster.strength}
+defense {Character.defense}                     defense {Monster.defense}
+                                                malace {Monster.malice}
+        """)
+     
     while Character.vit and Monster.vit:
         if not turn:
             take_turn(Character,Monster)
             turn += 1
+            print(f"""
+adv health {Character.vit}   **************     monster health {Monster.vit}
+strength {Character.strength}                   strenght {Monster.strength}
+defense {Character.defense}                     defense {Monster.defense}
+                                                malace {Monster.malice}
+        """)
+            if  Monster.vit <= 0:
+                 return winfight(Monster,Character,mon_reset)
         else:
             take_turn(Monster,Character)
             turn -= 1
             rounds += 1
-    if not Character.vit:
-        gameover(Monster.name)
-    elif not Monster.vit:
-        winfight(Monster.name)
+            print(f"""
+adv health {Character.vit}   **************     monster health {Monster.vit}
+strength {Character.strength}                   strenght {Monster.strength}
+defense {Character.defense}                     defense {Monster.defense}
+                                                malace {Monster.malice}
+        """)
+        if Character.vit <= 0:
+            return gameover(Monster.name)
+        elif Monster.vit <= 0:
+             return winfight(Monster.name)
 
 def take_turn(actor,passive):
+    monster_turn_stack = []
+    player_turn_stack = []
     if actor.id == "c":
+        if player_turn_stack:
+            actor.defense = actor.defense / 1.25
+            player_turn_stack.pop(0)
         take_t = input("""
-        (A)ttack
-        (D)efend
+        (a)ttack
+        (d)efend
         """)
-        print(f"""
-        adv health {actor.vit}
-        monster health {passive.vit}""")
 
-        if take_t == "A":
+        if take_t == "a":
             damage = actor.strength - passive.defense
             if damage == 0:
                 damage = 1
             passive.vit -= damage
-        elif take_t == "D":
+        elif take_t == "d":
             actor.defend()
+            player_turn_stack.append('def_up')
     elif actor.id == "m":
-        damage = actor.behavior()
-        passive.vit -= damage
+        if monster_turn_stack:
+            actor.defense = actor.defense / 1.25
+            monster_turn_stack.pop(0)
+        action,atk_name = actor.behavior()
+        if type(action) is int:
+            damage = action
+            print(f'{actor.name} {atk_name}ed')
+            passive.vit -= damage
+        else:
+            print(f'{actor.name} {atk_name}ed')
+            monster_turn_stack.append('def_up')
 
-def winfight(foeName):
-    pass
+def winfight(mon,character,hp_reset):
+    """handles after battle exp gain and resuming story
+    Args:
+        mon ([type]): [description]
+        character ([type]): [description]
+    """
+    # hp for monsters need to be reset
+    mon.vit = hp_reset
+    print(f'You defeated {mon.name} and gained {mon.exp_val} experience')
+    print(character.exp_gain(mon.exp_val))
+
+    
 
 
 def gameover(cause):
