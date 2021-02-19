@@ -36,6 +36,7 @@ class Monster:
         self.malice = malice
         self.id = "m"
         self.exp_val = exp_val
+        self.potatoes = 1000
 
     def attack(self):
         return self.strength, 'attack'
