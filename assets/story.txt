@@ -2,13 +2,13 @@
 
 {dungeon} [You find yourself at the doorway to a Dungeon. You've heard many stories of great riches, and even greater foes inside. Do you go in(go) or look around (look)?]
 
-{town} [You come Up to a quaint little village. You see a worn looking tavern near the entrance, a few homes scattered with animals, and a general store in the middle. There are many people bustlying about, but from the corner of your eye you see a small boy crying in the alley. Do you check on the boy(comfort), go to the tavern(tavern), or look in the general store (store)?]
+{town} [You come Up to a quaint little village. You see a worn looking tavern near the entrance, a few homes scattered with animals, and a general store in the middle. There are many people bustlying about, but from the corner of your eye you see a small boy crying in the alley. Do you check on the boy(comfort), go to the tavern(tavern), or look in the general store (store) or back to (start)?]
 
 {path} [You come upon a forked path through the forest. One path  goes down by a small river. You see it looks bright and quite cheery. There are red toadstools along the edges of the path. The other path looked less pleasing. It is darker, with dead trees lining the way. However you see twinkling from the corner of your vision and this path feels warm. Do you go down the (river) path, or take the (dark) path?]
 
-{go} [You are staring down a dark solid stone hallway. There is faint light at the end, coming from under a door. A cold breeze runs down your spine and the dungeon door slams shut. You can't open it again. Do you (check) out the door, or (examine) first?]
+{go} [You are staring down a dark solid stone hallway. There is faint light at the end, coming from under a door. A cold breeze runs down your spine and the dungeon door slams shut. You can't open it again. Do you (inspect) out the door, or (examine) first?]
 
-{look} [You can see the dungeon door has been opened many times as the brass is worn away, but when you open the door slightly, the other knob looks dustly and unused. To the side of the door there is a loose rock that seems to be blocking a hole. Moving that aside, There seems to be an entrance here. Do you (go) in the new entrance or (go) take your chances with the well known door?] 
+{look} [You can see the dungeon door has been opened many times as the brass is worn away, but when you open the door slightly, the other knob looks dustly and unused. To the side of the door there is a loose rock that seems to be blocking a hole. Moving that aside, There seems to be an entrance here. Do you (squeeze) in the new entrance or (go) take your chances with the well known door?] 
 
 {comfort} [You go to check on the crying little boy. He says his papa wasn't home when he got off school, and there was a trail of something sticky and red across his home. He asks you to help him find his papa, offering you a family heirloom. It's just a simple Knitting set, but it has a glow about it. Do you (help) the boy, or go to the (tavern), or (look) in the general store?]
 
@@ -20,11 +20,11 @@
 
 {dark} [You start down the dark path. It's really cold, and you bring your coat in closer. There is a howl in the distance as you think back to the safer looking path. Suddenly a small white rabbit runs across your path. "Hello human, are you lost?" It spoke to you! Do you (run) away or try and (speak) to the rabbit?]
 
-{check} [You decide to just go for the door. You failed to see the colored pattern on the floor and more promptly dropped through a trapdoor into a pit make of steel spikes. You die on impact, and even your ghost lost HP.]
+{inspect} [You decide to just go for the door. You failed to see the colored pattern on the floor and more promptly dropped through a trapdoor into a pit make of steel spikes. You die on impact, and even your ghost lost HP.]
 
 {examine} [You see a weird pattern on the floor. It looks like the blue squares are raised, but only slightly. You also see a bit of what looks like dried blood seeping from the floor into the tiles. Do you carefully cross the room on the (blue) or (avoid) the blue tiles?]
 
-{sqeeze} [You sqeeze down in into the small entrance next to the dungeon. It seems to slant downward. At the bottom, the squeeze opens up into big room. One side has 6 foot steel spikes pounded into the groud above what looks to be a trap door. You can see remenants of others who failed to make it past this trick. On the other is a table with various books and bottles, next to a door. Do you (check) the bottles to see if they are useful or (sneak) through the door?]
+{squeeze} [You squeeze down in into the small entrance next to the dungeon. It seems to slant downward. At the bottom, the squeeze opens up into big room. One side has 6 foot steel spikes pounded into the groud above what looks to be a trap door. You can see remenants of others who failed to make it past this trick. On the other is a table with various books and bottles, next to a door. Do you (check) the bottles to see if they are useful or (sneak) through the door?]
 
 {help} [You follow the little boy to his home. There you find a fresh trail of blood leading to the barn. Inside, it looks like there was a struggle. There is grey fur clinging to the wooden stairs, and the gun from the wall mount is missing. You hear a loud growl come from the barn, and quickly hide the kid. You can (investigate) the barn, or go back to the (town). Either way, your sword is out.]
 
@@ -44,7 +44,7 @@
 
 {run} [You run away, dodging through the trees. The creature didn't follow but now you are lost! Do you get out your map and make it back to (town) or just keep (going) and hope you find something to do?]
 
-{speak} [You try and talk to the white rabbit, "I mean you no harm! I'm just an adventurer looking for work" the white rabbit turns around and stomps his little leg at you, looks into your eyes and into the woods. You think he wants you to follow him. Do you (follow) the white rabbit or go back to the (town)?]
+{speak} [You try and talk to the white rabbit, "I mean you no harm! I'm just an adventurer looking for work" the white rabbit turns around and stomps his little leg at you, looks into your eyes and into the woods. You think he wants you to follow him. Do you (persue) the white rabbit or go back to the (town)?]
 
 {blue} [You tried to cross on the blue tiles, but alas this was a trap! Your footing slips and you almost fall upon spikes. You can see the blood covered spikes as you grasp the other end of the trap door. With a big heave you were able to get yourself out of the trap, but not without scrapes. At the end of the hall is only a door, with a warm light coming from underneath. Do you (open) the door and go in or check for (more) information?]
 
@@ -66,7 +66,7 @@
 
 {going} [You keep going, hoping to find something cool. In the forest you find something you don't reconize. It looks like a big bow tie made out of metal. There is a round center part, and two big hexagonal shaped panels jutting out from the side. It is covered in moss and looks like it crashed here. On the side you swipe away some dust and make out the words  DS-61-2. Do you go (inside) or keep going into the (woods)?]
 
-{follow} [You follow the white rabbit deep into the woods. It gets darker and darker, but tiny lights appear to float through the forest along your path. A fine mist joins you as well. The rabbit stops at an ancient tree. It's bigger than any you've ever seen. Is it you, or did the rabbit just motion for you to go in? Do you go in the (tree) or perhaps try and (walk) away?]
+{persue} [You follow the white rabbit deep into the woods. It gets darker and darker, but tiny lights appear to float through the forest along your path. A fine mist joins you as well. The rabbit stops at an ancient tree. It's bigger than any you've ever seen. Is it you, or did the rabbit just motion for you to go in? Do you go in the (tree) or perhaps try and (walk) away?]
 
 {open} [You open the door, and step inside. There is a warm hearth in the corner, surrounded by meats and drying herbs. There is a huge chair facing the hearth, and something big is seated there. Suddenly the creature turns around and looks at you. It looks angry. Are you going to (fight) or (sprint) away?]
 
