@@ -58,82 +58,90 @@ def play(adv, bestiary, store):
     file = read_file('./assets/story.txt')
     story = process_story(file)
     input_keys = 'qwer'
-    input_string = f'''
-What will you do?'''
-    print(f'''{story['start'][0]}
-    ''')
+    input_string = f'''\nWhat will you do?'''
+    print(f'''\n{story['start'][0]}''')
+    exit_peripheral = False
     current_ops = get_options(story['start'])
 
     while adv.vit:
         if len(current_ops) == 0:
             gameover("Your not smart enough")
-        for option in range(len(current_ops)):
-            input_string += f''' 
-({input_keys[option]}){current_ops[option]}
-'''
+        if not exit_peripheral:
+            for option in range(len(current_ops)):
+                input_string += f'''\n({input_keys[option]}){current_ops[option]}'''
+
         choice = input(input_string)
         if choice == 'q':
+
             if current_ops[0] == 'fight':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+                exit_peripheral = True
             elif current_ops[0] == 'store':
                 store.show_shop()
-                shop(adv)
-                
+                shop(adv,store)
+                exit_peripheral = True
             else:
+                exit_peripheral = False
                 print(story[f'{current_ops[0]}'][0])
                 current_ops = get_options(story[f'{current_ops[0]}'])
-                # print(current_ops)
-                input_string = f'''
-What will you do?'''
+                input_string = f'''\nWhat will you do?'''
+                
         elif choice == 'w':
             if current_ops[1] == 'fight':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+                exit_peripheral = True
             elif current_ops[1] == 'store':
                 store.show_shop()
-                shop(adv)
+                shop(adv,store)
+                exit_peripheral = True
             else:
+                exit_peripheral = False
                 print(story[f'{current_ops[1]}'][0])
                 current_ops = get_options(story[f'{current_ops[1]}'])
                 # print(current_ops)
-                input_string = f'''
-What will you do?'''
+                input_string = f'''\nWhat will you do?'''
 
         elif choice == 'e':
+
             if current_ops[2] == 'fight':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+                exit_peripheral = True
             elif current_ops[2] == 'store':
                 store.show_shop()
-                shop(adv)                
+                shop(adv,store)  
+                exit_peripheral = True              
             else:
+                exit_peripheral = False
                 print(story[f'{current_ops[2]}'][0])
                 current_ops = get_options(story[f'{current_ops[2]}'])
                 # print(current_ops)
-                input_string = f'''
-What will you do?'''
+                input_string = f'''\nWhat will you do?'''
 
         elif choice == 'r':
+
             if current_ops[3] == 'fight':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+                exit_peripheral = True
             elif current_ops[3] == 'store':
                 store.show_shop()
-                shop(adv)                
+                shop(adv)    
+                exit_peripheral = True            
             else:
+                exit_peripheral = False
                 print(story[f'{current_ops[3]}'][0])
                 current_ops = get_options(story[f'{current_ops[3]}'])
-                input_string = f'''
-What will you do?'''
+                input_string = f'''\nWhat will you do?.'''
 
         elif choice == 'lft':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+                exit_peripheral = True
         else:
-            input_string = f'''
-What will you do?
-                            '''
+            input_string = f'''\nWhat will you do?'''
 
 
 
@@ -270,23 +278,33 @@ def winfight(mon,character,hp_reset):
     print(character.exp_gain(mon.exp_val))
 
 def shop(adv,store):
-    buy = input("What are you buying (armor , weapons)")
-    if buy == "armor":
-        item_select = input("Type name of item")
-        for item in store.armor:
-            if item_select == item.name:
-                if adv.potatoes >= item.price:
-                    adv.add_item(item)
-                else:
-                    print("No money no honey")
-    elif buy == "weapons":
-        item_select = input("Type name of item")
-        for item in store.armor:
-            if item_select == item.name:
-                if adv.potatoes >= item.price:
-                    adv.add_item(item)
-                else:
-                    print("No money no honey")
+    while adv.vit:
+        buy = input("What are you buying (armor , weapon)\n Press (z) to exit store")
+        if buy == "armor":
+            item_select = input("Type name of item")
+            for item in store.armor:
+                if item_select == item.name:
+                    if adv.potatoes >= item.price:
+                        adv.add_item(item)
+                        print('Thank you for your buisness')
+                        adv.pull_stats()
+                        store.armor.pop(0)
+                    else:
+                        print("No money no honey")
+        elif buy == "weapon":
+            item_select = input("Type name of item")
+            for item in store.weapons:
+                if item_select == item.name:
+                    if adv.potatoes >= item.price:
+                        adv.add_item(item)
+                        print('Thank You For Your buisness')
+                        adv.pull_stats()
+                        store.weapons.pop(0)
+                    else:
+                        print("No money no honey")
+        elif buy == 'z':
+            print('thanks for shopping')
+            return
     
 
     # if adv.potatoes >= store.weapons[0]
@@ -309,20 +327,11 @@ def quits():
     exit()
 
 if __name__ == "__main__":
-    # game_logic()
+    game_logic()
     # story_txt = read_file('./assets/story.txt')
     # print(store_story(story_txt))
     # process_story(story_txt)
-    char = Character("sam")
-    bow = Items("bow", 10, 10, 10, "sword", 100)
-    char.add_item(bow)
-    print(char.strength)
-    print(char.vit)
-    print(char.defense)
-    char.pull_stats()
-    print(char.strength)
-    print(char.vit)
-    print(char.defense)
+  
 
 
 
