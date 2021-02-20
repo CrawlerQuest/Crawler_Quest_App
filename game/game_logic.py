@@ -75,8 +75,10 @@ def play(adv, bestiary, store):
 
             if current_ops[0] == 'fight':
                 mon = random.choice(bestiary.randos)
-                fight(adv,mon)
+                check = fight(adv,mon)
                 exit_peripheral = True
+                if check:
+                    win_game(adv, bestiary, store)
             elif current_ops[0] == 'store':
                 store.show_shop()
                 shop(adv,store)
@@ -90,8 +92,10 @@ def play(adv, bestiary, store):
         elif choice == 'w':
             if current_ops[1] == 'fight':
                 mon = random.choice(bestiary.randos)
-                fight(adv,mon)
+                check = fight(adv,mon)
                 exit_peripheral = True
+                if check:
+                    win_game(adv, bestiary, store)
             elif current_ops[1] == 'store':
                 store.show_shop()
                 shop(adv,store)
@@ -107,8 +111,10 @@ def play(adv, bestiary, store):
 
             if current_ops[2] == 'fight':
                 mon = random.choice(bestiary.randos)
-                fight(adv,mon)
+                check = fight(adv,mon)
                 exit_peripheral = True
+                if check:
+                    win_game(adv, bestiary, store)
             elif current_ops[2] == 'store':
                 store.show_shop()
                 shop(adv,store)  
@@ -124,8 +130,10 @@ def play(adv, bestiary, store):
 
             if current_ops[3] == 'fight':
                 mon = random.choice(bestiary.randos)
-                fight(adv,mon)
+                check = fight(adv,mon)
                 exit_peripheral = True
+                if check:
+                    win_game(adv, bestiary, store)
             elif current_ops[3] == 'store':
                 store.show_shop()
                 shop(adv)    
@@ -276,6 +284,7 @@ def winfight(mon,character,hp_reset):
     print(f"you have {character.potatoes} NOW")
     print(f'You defeated {mon.name} and gained {mon.exp_val} experience')
     print(character.exp_gain(mon.exp_val))
+    return True
 
 def shop(adv,store):
     while adv.vit:
@@ -325,6 +334,15 @@ def gameover(cause):
 def quits():
     print("You are the weakest link goodbye")
     exit()
+
+def win_game(adv, bestiary, store):
+    wingame = text2art(f"Path Complete", chr_ignore=True)
+    reset_choice = input("Would you like to choose another path? (r)eset or (q)uit")
+    if reset_choice == "r":
+        play(adv, bestiary, store)
+    elif reset_choice == "q":
+        quits()
+    
 
 if __name__ == "__main__":
     game_logic()
