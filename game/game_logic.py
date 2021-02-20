@@ -1,6 +1,7 @@
 from art import *
 import random
 import re
+import pickle
 from colorama import Fore, Back, Style
 from kary import KaryTree, KaryNode
 from character.character_logic import Character
@@ -27,33 +28,38 @@ def game_logic():
     """)
     print(Style.RESET_ALL) 
     if start_game == "s":
-        adventurer = Character(load())
-        store = Storefront()  #Creates instance of our character
+        adventurer = load()
+        store = Storefront() 
         besti = Bestiary()
         play(adventurer, besti, store) 
     else:
         quits()
 
 def load():
-    """reads save file if theri is not one it creates then reads
+    """reads save file if their is not one it creates then reads
     Returns:
         [string]:
     """
-    loaded_data = False
-    save_data = False
+    adv = False
+    save_me = False
     username = input('Please enter your name adventurer')
     try:
-        loaded_data = open(f'{username}.txt','r')
+        with open(f'{username}.pkl','rb') as load_adv:
+            adv = pickle.load(load_adv)
     except:
-        save_data = open(f'{username}.txt','x')
-        save_data.write(f'{username}')
-        return_data = open(f'{username}.txt','r')
+        print('Not Working')
+        with open(f'{username}.pkl','wb') as new_adv:
+            save_me = Character(username)
+            pickle.dump(save_me,new_adv,pickle.HIGHEST_PROTOCOL)
 
-    if loaded_data:
-        return loaded_data.read()
-    elif save_data:
-        return return_data.read()
+    if adv:
+        return adv
+    elif save_me:
+        return save_me
 
+def save(adv):
+    with open(f'{adv.name}.pkl','wb') as sav_adv:
+        pickle.dump(adv,sav_adv,pickle.HIGHEST_PROTOCOL)
 def play(adv, bestiary, store):
     file = read_file('./assets/story.txt')
     story = process_story(file)
@@ -76,12 +82,15 @@ def play(adv, bestiary, store):
             if current_ops[0] == 'fight':
                 mon = random.choice(bestiary.randos)
                 check = fight(adv,mon)
+                fight(adv,mon)
+                save(adv)
                 exit_peripheral = True
                 if check:
                     win_game(adv, bestiary, store)
             elif current_ops[0] == 'store':
                 store.show_shop()
                 shop(adv,store)
+                save(adv)
                 exit_peripheral = True
             else:
                 exit_peripheral = False
@@ -93,12 +102,15 @@ def play(adv, bestiary, store):
             if current_ops[1] == 'fight':
                 mon = random.choice(bestiary.randos)
                 check = fight(adv,mon)
+                fight(adv,mon)
+                save(adv)
                 exit_peripheral = True
                 if check:
                     win_game(adv, bestiary, store)
             elif current_ops[1] == 'store':
                 store.show_shop()
                 shop(adv,store)
+                save(adv)
                 exit_peripheral = True
             else:
                 exit_peripheral = False
@@ -112,12 +124,15 @@ def play(adv, bestiary, store):
             if current_ops[2] == 'fight':
                 mon = random.choice(bestiary.randos)
                 check = fight(adv,mon)
+                fight(adv,mon)
+                save(adv)
                 exit_peripheral = True
                 if check:
                     win_game(adv, bestiary, store)
             elif current_ops[2] == 'store':
                 store.show_shop()
                 shop(adv,store)  
+                save(adv)
                 exit_peripheral = True              
             else:
                 exit_peripheral = False
@@ -131,12 +146,15 @@ def play(adv, bestiary, store):
             if current_ops[3] == 'fight':
                 mon = random.choice(bestiary.randos)
                 check = fight(adv,mon)
+                fight(adv,mon)
+                save(adv)
                 exit_peripheral = True
                 if check:
                     win_game(adv, bestiary, store)
             elif current_ops[3] == 'store':
                 store.show_shop()
-                shop(adv)    
+                shop(adv)
+                save(adv)   
                 exit_peripheral = True            
             else:
                 exit_peripheral = False
@@ -147,6 +165,7 @@ def play(adv, bestiary, store):
         elif choice == 'lft':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
+                save(adv)
                 exit_peripheral = True
         else:
             input_string = f'''\nWhat will you do?'''
@@ -206,6 +225,7 @@ def fight(Character, Monster):
     mon_reset = Monster.vit
     print(f'A {Monster.name} approaches')
     print(f"""
+lvl {Character.level}
 adv health {Character.vit}   **************     monster health {Monster.vit}
 strength {Character.strength}                   strenght {Monster.strength}
 defense {Character.defense}                     defense {Monster.defense}
