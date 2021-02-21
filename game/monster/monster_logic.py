@@ -42,7 +42,7 @@ class Monster:
         return self.strength, 'attack'
 
     def defend(self):
-        self.defense * 1.25
+        self.defense = self.defense * 1.25
         return None, 'defend'
 
     def haymaker(self):

@@ -7,26 +7,31 @@ from kary import KaryTree, KaryNode
 from character.character_logic import Character
 from monster.monster_logic import Bestiary, Monster
 from merchant.merchant_logic import Storefront, Items
+import os
+
+# def center_console():
+term_size = os.get_terminal_size().columns
+# print("ALASKA".center(term_size))
+# width_size = os.term_size.columns()
+# print(width_size)
 
 
 def game_logic():
     title = text2art("Crawler Quest", chr_ignore=True)
-    print(Fore.RED + title)
+    # center_title = print(title.center(term_size.columns))
+    print(Fore.RED)
+    print(Back.BLACK)
+    print(Style.BRIGHT + title)
     print(Style.RESET_ALL) 
-    print(Fore.BLUE)
-    print("""
-    *****************
-    Welcome
-    to
-    the 
-    thunderdome
-    *****************
-    """)
+    print(Fore.GREEN)
+    print(Style.BRIGHT)
+    print(Back.BLACK)
+    print("A long time ago, in a galaxy far, far away...".center(term_size))
     start_game = input("""
     (s)tart Game
     (q)uit Game
     """)
-    print(Style.RESET_ALL) 
+    # print(Style.RESET_ALL) 
     if start_game == "s":
         adventurer = load()
         store = Storefront() 
@@ -42,7 +47,9 @@ def load():
     """
     adv = False
     save_me = False
-    username = input('Please enter your name adventurer')
+    username = input("""
+    Please enter your name adventurer
+    """)
     try:
         with open(f'{username}.pkl','rb') as load_adv:
             adv = pickle.load(load_adv)
@@ -53,7 +60,14 @@ def load():
             pickle.dump(save_me,new_adv,pickle.HIGHEST_PROTOCOL)
 
     if adv:
+        print(f"""
+        Name:{adv.name}
+        Level:{adv.level}
+        Strength:{adv.strength}
+        Vitality:{adv.vit}
+        """)
         return adv
+
     elif save_me:
         return save_me
 
@@ -74,7 +88,9 @@ def play(adv, bestiary, store):
             gameover("Your not smart enough")
         if not exit_peripheral:
             for option in range(len(current_ops)):
-                input_string += f'''\n({input_keys[option]}){current_ops[option]}'''
+                input_string += f'''
+                \n({input_keys[option]}){current_ops[option]}
+                '''
 
         choice = input(input_string)
         if choice == 'q':
@@ -343,10 +359,10 @@ def gameover(cause):
     endgame = text2art(f"{cause}", chr_ignore=True)
     print(endgame)
     endgame_input = input("""
-    (Q)uit
-    (R)estart
+    (q)uit
+    (r)estart
     """)
-    if endgame_input == "Q":
+    if endgame_input == "q":
         quits()
     else:
         game_logic()
