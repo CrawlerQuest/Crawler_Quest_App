@@ -59,7 +59,10 @@ class Character:
 
     def take_pots(self, potatoe):
         self.potatoes += potatoe
-    
+
+    def remaining_potatoes(self, item_price):
+        self.potatoes = self.potatoes - item_price
+
     def exp_gain(self,exp):
         """[takes in int of experience and subtracts from needed exp to level]
         Calls:
