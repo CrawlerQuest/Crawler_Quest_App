@@ -1,5 +1,3 @@
-
-
 class Character:
     def __init__(self,name):
         self.strength = 8
@@ -12,6 +10,7 @@ class Character:
         self.name = name
         self.id = "c"
         self.level = 1
+        self.exp = 0 
         self.exp_to_level = 5
         self.potatoes = 25
 
@@ -60,19 +59,25 @@ class Character:
     def take_pots(self, potatoe):
         self.potatoes += potatoe
     
-    def exp_gain(self,exp):
+    def exp_gain(self,exp_gain):
         """[takes in int of experience and subtracts from needed exp to level]
         Calls:
             level up
         """
-        exp_calc = self.exp_to_level - exp
-        if exp_calc > 0:
-            self.exp_to_level = exp_calc
-        while exp_calc <= 0:
+        self.exp += exp_gain
+        while self.exp >= self.exp_to_level:
+            self.exp -= self.exp_to_level
             self.level_up()
-            exp_calc += self.exp_to_level
-            self.exp_to_level -= exp_calc
-        return self.exp_to_level
+        
+        return self.exp_to_level,self.exp
+
+        # if exp_calc > 0:
+        #     self.exp_to_level = exp_calc
+        # while exp_calc <= 0:
+        #     self.level_up()
+        #     exp_calc += self.exp_to_level
+        #     self.exp_to_level -= exp_calc
+        # return self.exp_to_level
         
 
     def level_up(self):
@@ -82,7 +87,7 @@ class Character:
         self.strength +=2
         self.vit += 3
         self.defense +=1
-        self.exp_to_level += self.exp_to_level
+        self.exp_to_level = self.level * 5
         print(f"""
         You leveled UP!
         Level:{self.level}
