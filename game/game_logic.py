@@ -93,16 +93,16 @@ def play(adv, bestiary, store):
 
         choice = input(input_string)
         if choice == 'q':
-            current_ops = choice_Handler(current_ops[0],adv,bestiary,story,0)  
+            current_ops = choice_Handler(current_ops[0],adv,bestiary,story,0, store)  
             input_string = f'''\nWhat will you do?'''  
         elif choice == 'w':
-            choice_Handler(current_ops[1],adv,bestiary,story,1)
+            choice_Handler(current_ops[1],adv,bestiary,story,1, store)
             input_string = f'''\nWhat will you do?'''  
         elif choice == 'e':
-            choice_Handler(current_ops[2],adv,bestiary,story,2)
+            choice_Handler(current_ops[2],adv,bestiary,story,2, store)
             input_string = f'''\nWhat will you do?'''  
         elif choice == 'r':
-            choice_Handler(current_ops[3],adv,bestiary,story,3)
+            choice_Handler(current_ops[3],adv,bestiary,story,3, store)
             input_string = f'''\nWhat will you do?'''  
         elif choice == 'lft':
                 mon = random.choice(bestiary.randos)
@@ -112,7 +112,7 @@ def play(adv, bestiary, store):
         else:
             input_string = f'''\nWhat will you do?'''
 
-def choice_Handler(option,adv,bestiary,story,idx):
+def choice_Handler(option,adv,bestiary,story,idx, store):
     if option == 'fight':
         boss_check = []
         boss = random.choice(bestiary.bosses)
