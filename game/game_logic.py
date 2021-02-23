@@ -16,7 +16,7 @@ term_size = os.get_terminal_size().columns
 
 
 def game_logic():
-    title = text2art("Crawler Quest", chr_ignore=True)
+    title = text2art("                     Crawler Quest", chr_ignore=True)
     # center_title = print(title.center(term_size.columns))
     print(Fore.RED)
     print(Back.BLACK)
@@ -64,6 +64,7 @@ def load():
         Level:{adv.level}
         Strength:{adv.strength}
         Vitality:{adv.vit}
+        Potatoes:{adv.potatoes}
         """)
         return adv
 
@@ -93,19 +94,28 @@ def play(adv, bestiary, store):
 
         choice = input(input_string)
         if choice == 'q':
-            current_ops = choice_Handler(current_ops[0],adv,bestiary,story,0, store)  
-            input_string = f'''\nWhat will you do?'''  
+            current_ops, exit_peripheral = choice_Handler(current_ops[0],adv,bestiary,story,0, store)
+            if not exit_peripheral:
+                input_string = f'''\nWhat will you do?'''  
         elif choice == 'w':
-            choice_Handler(current_ops[1],adv,bestiary,story,1, store)
-            input_string = f'''\nWhat will you do?'''  
+            current_ops, exit_peripheral = choice_Handler(current_ops[1],adv,bestiary,story,1, store)
+            if not exit_peripheral:
+                input_string = f'''\nWhat will you do?'''  
         elif choice == 'e':
-            choice_Handler(current_ops[2],adv,bestiary,story,2, store)
-            input_string = f'''\nWhat will you do?'''  
+            current_ops, exit_peripheral = choice_Handler(current_ops[2],adv,bestiary,story,2, store)
+            if not exit_peripheral:
+                input_string = f'''\nWhat will you do?'''  
         elif choice == 'r':
-            choice_Handler(current_ops[3],adv,bestiary,story,3, store)
-            input_string = f'''\nWhat will you do?'''  
+            current_ops, exit_peripheral = choice_Handler(current_ops[3],adv,bestiary,story,3, store)
+            if not exit_peripheral:
+                input_string = f'''\nWhat will you do?'''  
         elif choice == 'lft':
                 mon = random.choice(bestiary.randos)
+                fight(adv,mon)
+                save(adv)
+                exit_peripheral = True
+        elif choice == 'boss':
+                mon = random.choice(bestiary.bosses)
                 fight(adv,mon)
                 save(adv)
                 exit_peripheral = True
@@ -113,6 +123,7 @@ def play(adv, bestiary, store):
             input_string = f'''\nWhat will you do?'''
 
 def choice_Handler(option,adv,bestiary,story,idx, store):
+    exit_peripheral = False
     if option == 'fight':
         boss_check = []
         boss = random.choice(bestiary.bosses)
@@ -131,14 +142,14 @@ def choice_Handler(option,adv,bestiary,story,idx, store):
     elif option == 'store':
         store.show_shop()
         shop(adv,store)
+        option = get_options(story["town"])
         save(adv)
         exit_peripheral = True
     else:
-        exit_peripheral = False
         print_val = story[f'{option}']
         print(f'{print_val[0]}')
         option = get_options(story[f'{option}'])
-    return option
+    return option, exit_peripheral
 
 def read_file(txt_file):
     with open(txt_file) as text:
@@ -188,30 +199,28 @@ def fight(Character, Monster):
         winfight: if monster vit reaches zero
     """
     def fight_text(adv,mon):
-        return f"""
-        lvl {adv.level}
-        adv health {adv.vit}   **************     monster health {mon.vit}
-        strength {adv.strength}                   strenght {mon.strength}
-        defense {adv.defense}                     defense {mon.defense}
-                                                        malace {mon.malice}"""
+        print(f"Character health {Character.vit} ***** Monster health {Monster.vit}".center(term_size))
+        print(f"Character strength {Character.strength} ***** Monster strength {Monster.strength}".center(term_size))
+        print(f"Character defense {Character.defense} ***** Monster defense {Monster.defense}\n".center(term_size))
+                                                  
     turn = 0
     rounds = 0
     mon_reset = Monster.vit
-    print(f'A {Monster.name} approaches')
-    print(fight_text(Character,Monster))
+    print(f'A {Monster.name} approaches\n'.center(term_size))
+    fight_text(Character, Monster)
 
     while Character.vit and Monster.vit:
         if not turn:
             take_turn(Character,Monster)
             turn += 1
-            print(fight_text(Character,Monster))
+            fight_text(Character, Monster)
             if  Monster.vit <= 0:
                  return winfight(Monster,Character,mon_reset)
         else:
             take_turn(Monster,Character)
             turn -= 1
             rounds += 1
-            print(fight_text(Character,Monster))
+            fight_text(Character, Monster)
         if Character.vit <= 0:
             return gameover(Monster.name)
         elif Monster.vit <= 0:
@@ -268,21 +277,23 @@ def shop(adv,store):
     while adv.vit:
         buy = input("What are you buying (armor , weapon)\n Press (z) to exit store")
         if buy == "armor":
-            item_select = input("Type name of item")
+            item_select = input("Type name of item\n")
             for item in store.armor:
                 if item_select == item.name:
                     if adv.potatoes >= item.price:
+                        adv.potatoes -= item.price
                         adv.add_item(item)
-                        print('Thank you for your buisness')
+                        print('Thank you for your buisness\n')
                         adv.pull_stats()
                         store.armor.pop(0)
                     else:
                         print("No money no honey")
         elif buy == "weapon":
-            item_select = input("Type name of item")
+            item_select = input("Type name of item\n")
             for item in store.weapons:
                 if item_select == item.name:
                     if adv.potatoes >= item.price:
+                        adv.potatoes -= item.price
                         adv.add_item(item)
                         print('Thank You For Your buisness')
                         adv.pull_stats()
@@ -291,10 +302,8 @@ def shop(adv,store):
                         print("No money no honey")
         elif buy == 'z':
             print('thanks for shopping')
-            return
+            break
     
-
-    # if adv.potatoes >= store.weapons[0]
 
     
 def gameover(cause):

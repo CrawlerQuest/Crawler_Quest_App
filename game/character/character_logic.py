@@ -65,14 +65,18 @@ class Character:
         Calls:
             level up
         """
-        exp_calc = self.exp_to_level - exp
-        if exp_calc > 0:
-            self.exp_to_level = exp_calc
-        while exp_calc <= 0:
+        exp_calc = exp - self.exp_to_level
+        while exp_calc > 0:
             self.level_up()
-            exp_calc += self.exp_to_level
-            self.exp_to_level -= exp_calc
-        return self.exp_to_level
+        return exp_calc
+
+        # if exp_calc > 0:
+        #     self.exp_to_level = exp_calc
+        # while exp_calc <= 0:
+        #     self.level_up()
+        #     exp_calc += self.exp_to_level
+        #     self.exp_to_level -= exp_calc
+        # return self.exp_to_level
         
 
     def level_up(self):
