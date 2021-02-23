@@ -96,13 +96,13 @@ def play(adv, bestiary, store):
             current_ops = choice_Handler(current_ops[0],adv,bestiary,story,0, store)  
             input_string = f'''\nWhat will you do?'''  
         elif choice == 'w':
-            choice_Handler(current_ops[1],adv,bestiary,story,1, store)
+            current_ops = choice_Handler(current_ops[1],adv,bestiary,story,1, store)
             input_string = f'''\nWhat will you do?'''  
         elif choice == 'e':
-            choice_Handler(current_ops[2],adv,bestiary,story,2, store)
+            current_ops = choice_Handler(current_ops[2],adv,bestiary,story,2, store)
             input_string = f'''\nWhat will you do?'''  
         elif choice == 'r':
-            choice_Handler(current_ops[3],adv,bestiary,story,3, store)
+            current_ops = choice_Handler(current_ops[3],adv,bestiary,story,3, store)
             input_string = f'''\nWhat will you do?'''  
         elif choice == 'lft':
                 mon = random.choice(bestiary.randos)
