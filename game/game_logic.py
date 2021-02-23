@@ -13,7 +13,7 @@ term_size = os.get_terminal_size().columns
 
 
 def game_logic():
-    title = text2art("Crawler Quest", chr_ignore=True)
+    title = text2art("                      Crawler Quest", chr_ignore=True)
     # center_title = print(title.center(term_size.columns))
     print(Fore.RED)
     print(Back.BLACK)
