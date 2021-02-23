@@ -270,7 +270,8 @@ def winfight(mon,character,hp_reset):
     character.take_pots(mon.potatoes)
     print(f"you have {character.potatoes} NOW")
     print(f'You defeated {mon.name} and gained {mon.exp_val} experience')
-    print(character.exp_gain(mon.exp_val))
+    exp_needed, exp_curr = character.exp_gain(mon.exp_val)
+    print(f'{exp_needed} to level, current EXP: {exp_curr}')
     return True
 
 def shop(adv,store):

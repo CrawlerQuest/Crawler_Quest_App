@@ -11,17 +11,17 @@ class Storefront:
         force_field = Items("force field", 0, 50, 100, "shield", 1000)
 
         self.weapons.append(light_sabre)
-        self.weapons.append(force_field)
+        self.armor.append(force_field)
 
     def show_shop(self):
         print("No touch. Buy!")
-        wep_display = f"weapons:"
+        wep_display = f"weapons:\n\n"
         for weapon in self.weapons:
-            wep_display += f"{weapon.name}\n strength:{weapon.strength}\n vitality:{weapon.vit}\n defense:{weapon.defense}\n cost:{weapon.price}\n "
+            wep_display += f"{weapon.name}\n strength:{weapon.strength}\n vitality:{weapon.vit}\n defense:{weapon.defense}\n cost:{weapon.price}\n\n "
         print(wep_display)
-        armor_display = f"armor:"
+        armor_display = f"armor:\n\n"
         for armor in self.armor:
-            armor_display += f"{armor.name}\n strength:{armor.strength}\n vitality:{armor.vit}\n defense:{armor.defense}\n cost:{armor.price}\n "
+            armor_display += f"{armor.name}\n strength:{armor.strength}\n vitality:{armor.vit}\n defense:{armor.defense}\n cost:{armor.price}\n\n "
         print(armor_display)
         return
 
