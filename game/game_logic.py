@@ -3,7 +3,6 @@ import random
 import re
 import pickle
 from colorama import Fore, Back, Style
-from kary import KaryTree, KaryNode
 from character.character_logic import Character
 from monster.monster_logic import Bestiary, Monster
 from merchant.merchant_logic import Storefront, Items
@@ -101,90 +100,17 @@ def play(adv, bestiary, store):
 
         choice = input(input_string)
         if choice == 'q':
-
-            if current_ops[0] == 'fight':
-                mon = random.choice(bestiary.randos)
-                check = fight(adv,mon)
-                fight(adv,mon)
-                save(adv)
-                exit_peripheral = True
-                if check:
-                    win_game(adv, bestiary, store)
-            elif current_ops[0] == 'store':
-                store.show_shop()
-                shop(adv,store)
-                save(adv)
-                exit_peripheral = True
-            else:
-                exit_peripheral = False
-                print(story[f'{current_ops[0]}'][0])
-                current_ops = get_options(story[f'{current_ops[0]}'])
-                input_string = f'''\nWhat will you do?'''
-                
+            current_ops = choice_Handler(current_ops[0],adv,bestiary,story,0)  
+            input_string = f'''\nWhat will you do?'''  
         elif choice == 'w':
-            if current_ops[1] == 'fight':
-                mon = random.choice(bestiary.randos)
-                check = fight(adv,mon)
-                fight(adv,mon)
-                save(adv)
-                exit_peripheral = True
-                if check:
-                    win_game(adv, bestiary, store)
-            elif current_ops[1] == 'store':
-                store.show_shop()
-                shop(adv,store)
-                save(adv)
-                exit_peripheral = True
-            else:
-                exit_peripheral = False
-                print(story[f'{current_ops[1]}'][0])
-                current_ops = get_options(story[f'{current_ops[1]}'])
-                # print(current_ops)
-                input_string = f'''\nWhat will you do?'''
-
+            choice_Handler(current_ops[1],adv,bestiary,story,1)
+            input_string = f'''\nWhat will you do?'''  
         elif choice == 'e':
-
-            if current_ops[2] == 'fight':
-                mon = random.choice(bestiary.randos)
-                check = fight(adv,mon)
-                fight(adv,mon)
-                save(adv)
-                exit_peripheral = True
-                if check:
-                    win_game(adv, bestiary, store)
-            elif current_ops[2] == 'store':
-                store.show_shop()
-                shop(adv,store)  
-                save(adv)
-                exit_peripheral = True              
-            else:
-                exit_peripheral = False
-                print(story[f'{current_ops[2]}'][0])
-                current_ops = get_options(story[f'{current_ops[2]}'])
-                # print(current_ops)
-                input_string = f'''\nWhat will you do?'''
-
+            choice_Handler(current_ops[2],adv,bestiary,story,2)
+            input_string = f'''\nWhat will you do?'''  
         elif choice == 'r':
-
-            if current_ops[3] == 'fight':
-                mon = random.choice(bestiary.randos)
-                check = fight(adv,mon)
-                fight(adv,mon)
-                save(adv)
-                exit_peripheral = True
-                if check:
-                    win_game(adv, bestiary, store)
-            elif current_ops[3] == 'store':
-                store.show_shop()
-                shop(adv)
-                save(adv)   
-                exit_peripheral = True            
-            else:
-                exit_peripheral = False
-                print(story[f'{current_ops[3]}'][0])
-                current_ops = get_options(story[f'{current_ops[3]}'])
-                input_string = f'''\nWhat will you do?.'''
-
+            choice_Handler(current_ops[3],adv,bestiary,story,3)
+            input_string = f'''\nWhat will you do?'''  
         elif choice == 'lft':
                 mon = random.choice(bestiary.randos)
                 fight(adv,mon)
@@ -199,7 +125,33 @@ def play(adv, bestiary, store):
         else:
             input_string = f'''\nWhat will you do?'''
 
-
+def choice_Handler(option,adv,bestiary,story,idx):
+    if option == 'fight':
+        boss_check = []
+        boss = random.choice(bestiary.bosses)
+        small = random.choice(bestiary.randos)
+        boss_check.append(boss)
+        boss_check.append(small)
+        if adv.level > 8:
+            mon = random.choice(boss_check)
+        else:
+            mon = small
+            check = fight(adv,mon)
+            save(adv)
+            exit_peripheral = True
+        if check:
+            win_game(adv, bestiary, store)
+    elif option == 'store':
+        store.show_shop()
+        shop(adv,store)
+        save(adv)
+        exit_peripheral = True
+    else:
+        exit_peripheral = False
+        print_val = story[f'{option}']
+        print(f'{print_val[0]}')
+        option = get_options(story[f'{option}'])
+    return option
 
 def read_file(txt_file):
     with open(txt_file) as text:
@@ -238,7 +190,6 @@ def get_options(line):
     options = tuple(re.findall(r"\(([A-Za-z0-9_'\s1-]+)\)", line[0], re.IGNORECASE))
     return options
 
-    
 
 def fight(Character, Monster):
     """
@@ -249,50 +200,37 @@ def fight(Character, Monster):
         gameover: if character vit reaches zero
         winfight: if monster vit reaches zero
     """
+    def fight_text(adv,mon):
+        return f"""
+        lvl {adv.level}
+        adv health {adv.vit}   **************     monster health {mon.vit}
+        strength {adv.strength}                   strenght {mon.strength}
+        defense {adv.defense}                     defense {mon.defense}
+                                                        malace {mon.malice}"""
     turn = 0
     rounds = 0
     mon_reset = Monster.vit
-    print(f'A {Monster.name} approaches\n'.center(term_size))
-    print(f"Character lvl {Character.level}\n".center(term_size))
-    print(f"Character health {Character.vit} ***** Monster health {Monster.vit}".center(term_size))
-    print(f"Character strength {Character.strength} ***** Monster strength {Monster.strength}".center(term_size))
-    print(f"Character defense {Character.defense} ***** Monster defense {Monster.defense}".center(term_size))
-#     print(f"""
-# lvl {Character.level}
-# adv health {Character.vit} ***********  monster health {Monster.vit}
-# strength {Character.strength}  ***********   strength {Monster.strength}
-# defense {Character.defense}  ***********    defense {Monster.defense}
-#                             malace {Monster.malice}
-#         """.center(term_size))
-     
+
+    print(f'A {Monster.name} approaches')
+    print(fight_text(Character,Monster))
+
+
     while Character.vit and Monster.vit:
         if not turn:
             take_turn(Character,Monster)
             turn += 1
-            print(f"Character health {Character.vit} ***** Monster health {Monster.vit}".center(term_size))
-            print(f"Character strength {Character.strength} ***** Monster strength {Monster.strength}".center(term_size))
-            print(f"Character defense {Character.defense} ***** Monster defense {Monster.defense}\n".center(term_size))
-#             print(f"""
-# adv health {Character.vit}   **************     monster health {Monster.vit}
-# strength {Character.strength}                   strenght {Monster.strength}
-# defense {Character.defense}                     defense {Monster.defense}
-#                                                 malace {Monster.malice}
-#         """)
+
+            print(fight_text(Character,Monster))
+
             if  Monster.vit <= 0:
                  return winfight(Monster,Character,mon_reset)
         else:
             take_turn(Monster,Character)
             turn -= 1
             rounds += 1
-            print(f"Character health {Character.vit} ***** Monster health {Monster.vit}".center(term_size))
-            print(f"Character strength {Character.strength} ***** Monster strength {Monster.strength}".center(term_size))
-            print(f"Character defense {Character.defense} ***** Monster defense {Monster.defense}".center(term_size))
-#             print(f"""
-# adv health {Character.vit}   **************     monster health {Monster.vit}
-# strength {Character.strength}                   strenght {Monster.strength}
-# defense {Character.defense}                     defense {Monster.defense}
-#                                                 malace {Monster.malice}
-#         """)
+
+            print(fight_text(Character,Monster))
+
         if Character.vit <= 0:
             return gameover(Monster.name)
         elif Monster.vit <= 0:
