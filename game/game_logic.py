@@ -7,16 +7,12 @@ from character.character_logic import Character
 from monster.monster_logic import Bestiary, Monster
 from merchant.merchant_logic import Storefront, Items
 import os
-
-# def center_console():
 term_size = os.get_terminal_size().columns
-# print("ALASKA".center(term_size))
-# width_size = os.term_size.columns()
-# print(width_size)
+
 
 
 def game_logic():
-    title = text2art("Crawler Quest", chr_ignore=True)
+    title = text2art("                      Crawler Quest", chr_ignore=True)
     # center_title = print(title.center(term_size.columns))
     print(Fore.RED)
     print(Back.BLACK)
@@ -32,10 +28,10 @@ def game_logic():
     """)
     # print(Style.RESET_ALL) 
     if start_game == "s":
-        adventurer = load()
+        adv = load()
         store = Storefront() 
         besti = Bestiary()
-        play(adventurer, besti, store) 
+        play(adv, besti, store) 
     else:
         quits()
 
@@ -58,12 +54,23 @@ def load():
             save_me = Character(username)
             pickle.dump(save_me,new_adv,pickle.HIGHEST_PROTOCOL)
 
-    if adv:
+    if len(adv.gear) >= 4:
         print(f"""
         Name:{adv.name}
         Level:{adv.level}
         Strength:{adv.strength}
         Vitality:{adv.vit}
+        Potatoes:{adv.potatoes}
+        Gear:{adv.gear["sword"].name}, {adv.gear["shield"].name}
+        """)
+        return adv
+    elif adv:
+        print(f"""
+        Name:{adv.name}
+        Level:{adv.level}
+        Strength:{adv.strength}
+        Vitality:{adv.vit}
+        Potatoes:{adv.potatoes}
         """)
         return adv
 
@@ -84,7 +91,7 @@ def play(adv, bestiary, store):
 
     while adv.vit:
         if len(current_ops) == 0:
-            gameover("Your not smart enough")
+            gameover("Life Choices")
         if not exit_peripheral:
             for option in range(len(current_ops)):
                 input_string += f'''
@@ -106,6 +113,12 @@ def play(adv, bestiary, store):
             input_string = f'''\nWhat will you do?'''  
         elif choice == 'lft':
                 mon = random.choice(bestiary.randos)
+                fight(adv,mon)
+                save(adv)
+                exit_peripheral = True
+
+        elif choice == 'boss':
+                mon = random.choice(bestiary.bosses)
                 fight(adv,mon)
                 save(adv)
                 exit_peripheral = True
@@ -197,21 +210,27 @@ def fight(Character, Monster):
     turn = 0
     rounds = 0
     mon_reset = Monster.vit
+
     print(f'A {Monster.name} approaches')
     print(fight_text(Character,Monster))
+
 
     while Character.vit and Monster.vit:
         if not turn:
             take_turn(Character,Monster)
             turn += 1
+
             print(fight_text(Character,Monster))
+
             if  Monster.vit <= 0:
                  return winfight(Monster,Character,mon_reset)
         else:
             take_turn(Monster,Character)
             turn -= 1
             rounds += 1
+
             print(fight_text(Character,Monster))
+
         if Character.vit <= 0:
             return gameover(Monster.name)
         elif Monster.vit <= 0:
@@ -244,10 +263,10 @@ def take_turn(actor,passive):
         action,atk_name = actor.behavior()
         if type(action) is int:
             damage = action
-            print(f'{actor.name} {atk_name}ed')
+            print(f'{actor.name} {atk_name}ed\n'.center(term_size))
             passive.vit -= damage
         else:
-            print(f'{actor.name} {atk_name}ed')
+            print(f'{actor.name} {atk_name}ed\n')
             monster_turn_stack.append('def_up')
 
 def winfight(mon,character,hp_reset):
@@ -266,9 +285,9 @@ def winfight(mon,character,hp_reset):
 
 def shop(adv,store):
     while adv.vit:
-        buy = input("What are you buying (armor , weapon)\n Press (z) to exit store")
+        buy = input("What are you buying (armor , weapon)\n Press (z) to exit store\n")
         if buy == "armor":
-            item_select = input("Type name of item")
+            item_select = input("Type name of item\n")
             for item in store.armor:
                 if item_select == item.name:
                     if adv.potatoes >= item.price:
@@ -279,14 +298,16 @@ def shop(adv,store):
                     else:
                         print("No money no honey")
         elif buy == "weapon":
-            item_select = input("Type name of item")
+            item_select = input("Type name of item\n")
             for item in store.weapons:
                 if item_select == item.name:
                     if adv.potatoes >= item.price:
+                        remaining_potatoes(item_price)
                         adv.add_item(item)
-                        print('Thank You For Your buisness')
+                        print('Thank You For Your buisness\n')
                         adv.pull_stats()
                         store.weapons.pop(0)
+                        
                     else:
                         print("No money no honey")
         elif buy == 'z':
@@ -298,8 +319,11 @@ def shop(adv,store):
 
     
 def gameover(cause):
-    endgame = text2art(f"{cause}", chr_ignore=True)
-    print(endgame)
+    endgame = text2art(f"{cause} ended you", chr_ignore=True)
+    print(Fore.RED)
+    print(Back.BLACK)
+    print(Style.BRIGHT + endgame)
+    print(Style.RESET_ALL) 
     endgame_input = input("""
     (q)uit
     (r)estart
@@ -315,7 +339,7 @@ def quits():
 
 def win_game(adv, bestiary, store):
     wingame = text2art(f"Path Complete", chr_ignore=True)
-    reset_choice = input("Would you like to choose another path? (r)eset or (q)uit")
+    reset_choice = input("Would you like to choose another path? (r)eset or (q)uit\n")
     if reset_choice == "r":
         play(adv, bestiary, store)
     elif reset_choice == "q":
@@ -327,41 +351,3 @@ if __name__ == "__main__":
     # story_txt = read_file('./assets/story.txt')
     # print(store_story(story_txt))
     # process_story(story_txt)
-  
-
-
-
-
-
-
-
-    # count = 0
-    # children = []
-    # root = KaryNode(key_Nodes[0])
-    # story_tree = KaryTree(root)
-    # # print(story_tree.root.value)
-    # scene_parse = tuple(re.findall("\[.*?\]",txt_file, re.IGNORECASE))
-    # for scene in range(len(scene_parse)):
-    #     children_parse = tuple(re.findall("\(.*?\)",scene_parse[scene], re.IGNORECASE))
-    #     if count == 0:
-    #         root.children.append(KaryNode(children_parse[0]))
-    #         root.children.append(KaryNode(children_parse[1]))
-    #         root.children.append(KaryNode(children_parse[2]))
-    #         count += 1
-    #     children.append(children_parse)
-    # saplings = root.children
-    # for child in range(len(saplings)):
-        
-    #     children_parse = tuple(re.findall("\(.*?\)",scene_parse[scene], re.IGNORECASE))
-    #     for grand_child in range(len(children_parse)):
-    #         saplings[child].children.append(KaryNode(children_parse[grand_child]))
-
-
-    # return story_tree
-    # #    
-    # #     else:
-    # #         child = root.children[]
-    # #         child.children.append(KaryNode(children_parse[scene]))
-    # #         count +=1
-    
-    # # return story_tree

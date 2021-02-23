@@ -13,7 +13,7 @@ class Bestiary:
 
 
         #bigs
-        roger = Monster('Rodge',5,20,3,8,20)
+        roger = Monster('Rodge',20,20,3,8,20)
         troll = Monster('Troll',4,9,2,5,20)
         
 
@@ -22,7 +22,7 @@ class Bestiary:
         self.randos.append(trebble)
 
         self.bosses.append(roger)
-        self.bosses.append(troll)
+        # self.bosses.append(troll)
 
     
 
