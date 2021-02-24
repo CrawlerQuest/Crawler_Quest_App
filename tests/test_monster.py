@@ -25,12 +25,13 @@ def test_monster_behavior_above_30():
     expected = 10
     assert actual == expected
 
-# def test_monster_behavior_below_30():
-#     test_monst = Monster('John', 10, 11, 12, 13, 2)
-#     test_monst.vit - 10
-#     actual = test_monst.behavior()[0]
-#     expected = 10
-#     assert actual == expected
+def test_monster_behavior_below_30():
+    test_monst = Monster('John', 10, 11, 12, 13, 2)
+    test_monst.vit - 7
+    actual = test_monst.behavior()[0]
+    expected_one = 10
+    expected_two = None
+    assert actual == expected_one or actual == expected_two
 
 def test_bestiary_randos():
     besti = Bestiary()
@@ -74,4 +75,11 @@ def test_bestiary_bosses():
 
     actual = besti.bosses[0].name
     expected = "Rodge"
+    assert actual == expected
+
+def test_scale():
+    test_mon = Monster('Nosk',10,10,10,10,10)
+    test_mon.scale(2)
+    actual = test_mon.strength
+    expected = 27.0
     assert actual == expected

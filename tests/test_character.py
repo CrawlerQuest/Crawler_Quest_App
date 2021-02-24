@@ -1,4 +1,5 @@
 from game.character.character_logic import Character
+from game.merchant.merchant_logic import Items
 
 def test_exp():
     test_char = Character('Arty')
@@ -34,4 +35,53 @@ def test_exp_gain_under_level():
     expected = 1
     assert test_char.level == expected
 
+def test_character():
+    test_char = Character('Arty')
+    actual = test_char.name
+    expected = 'Arty'
+    assert actual == expected
 
+def test_add_item():
+    test_char = Character('Arty')
+    test_item = Items('Cain',1,1,1,'sword',20)
+    test_char.add_item(test_item)
+    actual = test_char.gear['sword']
+    expected = test_item
+    
+
+
+def test_pull_stats_sword():
+    test_char = Character('Arty')
+    test_item = Items('Cain',1,1,1,'sword',20)
+    test_char.add_item(test_item)
+    test_char.pull_stats()
+    actual = test_char.strength
+    expected = 9
+    assert actual == expected
+
+def test_pull_stats_shield():
+    test_char = Character('Arty')
+    test_item = Items('Cain',1,1,1,'shield',20)
+    test_char.add_item(test_item)
+    test_char.pull_stats()
+    actual = test_char.strength
+    expected = 9
+    assert actual == expected
+
+def test_pull_stats_helmet():
+    test_char = Character('Arty')
+    test_item = Items('Cain',1,1,1,'helmet',20)
+    test_char.add_item(test_item)
+    test_char.pull_stats()
+    actual = test_char.strength
+    expected = 9
+    assert actual == expected
+
+    
+def test_attack_action():
+    test_char = Character('Arty')
+    actual = test_char.attack()
+    expected = 8
+    assert actual == expected
+
+    

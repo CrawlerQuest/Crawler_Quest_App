@@ -23,7 +23,7 @@ class Storefront:
         for armor in self.armor:
             armor_display += f"{armor.name}\n strength:{armor.strength}\n vitality:{armor.vit}\n defense:{armor.defense}\n cost:{armor.price}\n\n "
         print(armor_display)
-        return
+        return True
 
     
 
@@ -36,8 +36,5 @@ class Items:
         self.price = price
         self.kind = kind
 
-if __name__ == "__main__":
-    store = Storefront()
-    store.show_shop()
 
 
