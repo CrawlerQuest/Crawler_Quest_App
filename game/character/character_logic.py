@@ -2,7 +2,7 @@ class Character:
     def __init__(self,name):
         self.strength = 8
         self.vit = 9
-        self.defense = 4
+        self.defense = 2
         self.gear = {
         "sword": None,
         "shield": None,
@@ -32,24 +32,6 @@ class Character:
             self.defense += self.gear["shield"].defense
 
                 
-
-    def sword(self,name,strength,vit):
-        self.strength += strength
-        self.vit += vit
-        self.gear.append(name)
-
-    def shield(self,name,strength,vit, defense):
-        self.strength += strength
-        self.vit += vit
-        self.defense += defense
-        self.gear.append(name)
-
-    def helmet(self,name,strength,vit, defense):
-        self.strength += strength
-        self.vit += vit
-        self.defense += defense
-        self.gear.append(name)
-
     def attack(self):
         return self.strength
 
@@ -71,14 +53,6 @@ class Character:
         
         return self.exp_to_level,self.exp
 
-        # if exp_calc > 0:
-        #     self.exp_to_level = exp_calc
-        # while exp_calc <= 0:
-        #     self.level_up()
-        #     exp_calc += self.exp_to_level
-        #     self.exp_to_level -= exp_calc
-        # return self.exp_to_level
-        
 
     def level_up(self):
         """[used to level up character]

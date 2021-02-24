@@ -36,7 +36,7 @@ class Monster:
         self.malice = malice
         self.id = "m"
         self.exp_val = exp_val
-        self.potatoes = 1000
+        self.potatoes = 100
 
     def attack(self):
         return self.strength, 'attack'
@@ -55,11 +55,15 @@ class Monster:
             chance = random.choice((self.haymaker(), self.defend()))
             return chance
             # does not - char health yet
+    def scale(self,adv_level):
+        self.strength = self.strength + ((self.strength * adv_level)*.85) 
+        self.vit = self.vit + ((self.strength * adv_level)*.75)
+        self.defense = self.defense + ((self.defense * adv_level)*.75)
+        self.exp_val = (self.exp_val * adv_level) * .90
+        self.potatoes = 100 * adv_level
 
 
-if __name__ == "__main__":
-    monst = Monster("john", 10, 10, 10, 10)
-    chance = random.choice((monst.haymaker(), monst.defend()))
-    print(chance)
-    besti = Bestiary()
-    print(besti.randos)
+
+
+
+

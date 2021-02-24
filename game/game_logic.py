@@ -3,13 +3,24 @@ import random
 import re
 import pickle
 from colorama import Fore, Back, Style
-from character.character_logic import Character
-from monster.monster_logic import Bestiary, Monster
-from merchant.merchant_logic import Storefront, Items
+try:
+    from character.character_logic import Character
+    from monster.monster_logic import Bestiary, Monster
+    from merchant.merchant_logic import Storefront, Items
+except:
+    from game.character.character_logic import Character
+    from game.monster.monster_logic import Bestiary, Monster
+    from game.merchant.merchant_logic import Storefront, Items
+
+
 import os
 
 # def center_console():
-term_size = os.get_terminal_size().columns
+try:
+    term_size = os.get_terminal_size().columns
+except:
+    term_size = 50
+
 # print("ALASKA".center(term_size))
 # width_size = os.term_size.columns()
 # print(width_size)
@@ -36,7 +47,10 @@ def game_logic():
         store = Storefront() 
         besti = Bestiary()
         play(adventurer, besti, store) 
+    elif start_game == 'q':
+        quits()
     else:
+        print('That was the first test and you failed it')
         quits()
 
 def load():
@@ -53,7 +67,7 @@ def load():
         with open(f'{username}.pkl','rb') as load_adv:
             adv = pickle.load(load_adv)
     except:
-        print('Not Working')
+        print('Character Created')
         with open(f'{username}.pkl','wb') as new_adv:
             save_me = Character(username)
             pickle.dump(save_me,new_adv,pickle.HIGHEST_PROTOCOL)
@@ -69,6 +83,13 @@ def load():
         return adv
 
     elif save_me:
+        print(f"""
+        Name:{save_me.name}
+        Level:{save_me.level}
+        Strength:{save_me.strength}
+        Vitality:{save_me.vit}
+        Potatoes:{save_me.potatoes}
+        """)
         return save_me
 
 def save(adv):
@@ -111,6 +132,7 @@ def play(adv, bestiary, store):
                 input_string = f'''\nWhat will you do?'''  
         elif choice == 'lft':
                 mon = random.choice(bestiary.randos)
+                mon.scale(adv.level)
                 fight(adv,mon)
                 save(adv)
                 exit_peripheral = True
@@ -134,6 +156,7 @@ def choice_Handler(option,adv,bestiary,story,idx, store):
             mon = random.choice(boss_check)
         else:
             mon = small
+            mon.scale(adv.level)
             check = fight(adv,mon)
             save(adv)
             exit_peripheral = True
@@ -251,8 +274,10 @@ def take_turn(actor,passive):
             actor.defense = actor.defense / 1.25
             monster_turn_stack.pop(0)
         action,atk_name = actor.behavior()
-        if type(action) is int:
+        if type(action) is int or float:
             damage = action
+            if damage == 0:
+                damage = 1
             print(f'{actor.name} {atk_name}ed')
             passive.vit -= damage
         else:
@@ -265,7 +290,6 @@ def winfight(mon,character,hp_reset):
         mon ([type]): [description]
         character ([type]): [description]
     """
-    # hp for monsters need to be reset
     mon.vit = hp_reset
     character.take_pots(mon.potatoes)
     print(f"you have {character.potatoes} NOW")

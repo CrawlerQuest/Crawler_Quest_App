@@ -8,7 +8,7 @@ def test_merchant_storefront_weapon():
     test_merch.weapons.append(weapon)
 
     actual = test_merch.weapons[0].name
-    expected = 'longsword'
+    expected = 'light sabre'
     assert actual == expected
 
 def test_merchant_storefront_armor():
@@ -19,19 +19,15 @@ def test_merchant_storefront_armor():
     test_merch.armor.append(shield)
 
     actual = test_merch.armor[0].name
-    expected = 'shield'
+    expected = 'force field'
     assert actual == expected
 
-# def test_merchant_show_shop():
-#     test_merch = Storefront()
-#     weapon = Items("longsword", 10, 10, 3, "sword", 100)
-#     shield = Items("shield", 4, 4, 10, "shield", 100)
-
-#     test_merch.armor.append(shield)
-
-#     actual = test_merch.show_shop()
-#     expected = f"shield\n strength:4\n vitality:4\n defense:10\n cost:100\n "
-#     assert actual == expected
+def test_merchant_show_shop():
+    test_merch = Storefront()
+  
+    actual = test_merch.show_shop()
+    expected = True
+    assert actual == expected
 
 def test_merch_items():
     test_items = Items('bow', 10, 11, 12, 'weapon', 100)
@@ -45,4 +41,10 @@ def test_merch_items_price():
    
     actual = test_items.price
     expected = 100
+    assert actual == expected
+
+def test_item():
+    test_item = Items('Cain',1,1,1,'sword',20)
+    actual = test_item.name
+    expected = 'Cain'
     assert actual == expected
