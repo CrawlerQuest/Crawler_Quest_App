@@ -141,8 +141,11 @@ def play(adv, bestiary, store):
                 fight(adv,mon)
                 save(adv)
                 exit_peripheral = True
+        elif choice == 'quit':
+            return adv.level
         else:
             input_string = f'''\nWhat will you do?'''
+        
 
 def choice_Handler(option,adv,bestiary,story,idx, store):
     exit_peripheral = False
@@ -346,6 +349,7 @@ def gameover(cause):
 def quits():
     print("You are the weakest link goodbye")
     exit()
+
 
 def win_game(adv, bestiary, store):
     wingame = text2art(f"Path Complete", chr_ignore=True)

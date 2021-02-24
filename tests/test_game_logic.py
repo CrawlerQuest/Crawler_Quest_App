@@ -1,6 +1,8 @@
 import game.game_logic as gm
 import mock
 import builtins
+import unittest
+from unittest.mock import patch
 
 
 def test_load():
@@ -107,6 +109,7 @@ def test_choice_handler_other():
         expected = (('test',), False)
         assert actual == expected
 
+
 def test_take_turn_monster():
     test_mon = gm.Monster('Siff',1,1,1,1,1)
     test_char = gm.Character('Arty')
@@ -116,6 +119,56 @@ def test_take_turn_monster():
 
     assert actual == expected
 
+
+class Test(unittest.TestCase):
+    @patch('builtins.input',side_effect=['armor','plate','z'])
+    def test_shop_buy_armor(self,mock_input):
+            test_char = gm.Character('Arty')
+            test_char.potatoes = 99999
+            test_store = gm.Storefront()
+            test_item = gm.Items('plate',1,1,1,'helmet',100)
+            test_store.armor.append(test_item)
+            gm.shop(test_char,test_store)
+
+
+            actual = test_char.strength
+            expected = 9
+            assert actual == expected
+    
+    @patch('builtins.input',side_effect=['weapon','plate','z'])
+    def test_shop_buy_weapon(self,mock_input):
+            test_char = gm.Character('Arty')
+            test_char.potatoes = 99999
+            test_store = gm.Storefront()
+            test_item = gm.Items('plate',1,1,1,'helmet',100)
+            test_store.weapons.append(test_item)
+            gm.shop(test_char,test_store)
+
+
+            actual = test_char.strength
+            expected = 9
+            assert actual == expected
+
+    @patch('builtins.input',side_effect=['q','e','z','lft','a','quit'])
+    def test_play_die_in_dungeon(self,mock_input):
+        test_char = gm.Character('Arty')
+        test_char.strength = 99
+        test_char.exp_to_level = 1
+        test_store = gm.Storefront()
+        test_besti = gm.Bestiary()
+        actual = gm.play(test_char,test_besti,test_store)
+        expected = 2
+        assert actual == expected
+
+
+
+
+
+    
+
+    
+
+    
 
 
 
