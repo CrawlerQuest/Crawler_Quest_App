@@ -157,6 +157,10 @@ def choice_Handler(option,adv,bestiary,story,idx, store):
         boss_check.append(small)
         if adv.level > 8:
             mon = random.choice(boss_check)
+            mon.scale(adv.level)
+            check = fight(adv,mon)
+            save(adv)
+            exit_peripheral = True
         else:
             mon = small
             mon.scale(adv.level)
