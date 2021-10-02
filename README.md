@@ -42,17 +42,17 @@ $ cd Crawler_Quest_App
 
 ``` python
 npm install
+npm init (This creates the json file)
+pip install colorama
+pip install art
+python game_logic.py
 ```
 
 ---
 
 ### Change Log
 
-***[The change log will list any changes made to the code base.]***  
 
-1.3: ** - **DATEHERE**
-1.2: ** - **DATEHERE**  
-1.1: *Initial App MVP met* - **DATEHERE**
 
 ### Model of our game:
 
